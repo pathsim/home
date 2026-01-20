@@ -197,7 +197,7 @@ S.plot()</code></pre>
 	}
 
 	.hero-logo {
-		height: 120px;
+		height: 200px;
 		width: auto;
 		margin-bottom: var(--space-xl);
 	}
@@ -395,7 +395,7 @@ S.plot()</code></pre>
 	}
 
 	.ecosystem-card img {
-		height: 80px;
+		height: 120px;
 		width: auto;
 	}
 
