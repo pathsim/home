@@ -360,7 +360,7 @@ scope.plot()`;
 	}
 
 	h2 {
-		font-size: var(--font-lg);
+		font-size: var(--font-base);
 		font-weight: 600;
 		color: var(--text-muted);
 		text-transform: uppercase;
@@ -491,16 +491,8 @@ scope.plot()`;
 	/* Installation */
 	.install-grid {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 		gap: var(--space-lg);
-		max-width: 700px;
-		margin: 0 auto;
-	}
-
-	@media (max-width: 600px) {
-		.install-grid {
-			grid-template-columns: 1fr;
-		}
 	}
 
 	.install-card {
@@ -529,7 +521,6 @@ scope.plot()`;
 	.install-body {
 		display: flex;
 		align-items: center;
-		justify-content: center;
 		padding: var(--space-lg);
 		background: var(--surface);
 	}
@@ -538,7 +529,7 @@ scope.plot()`;
 		background: none;
 		border: none;
 		padding: 0;
-		font-size: var(--font-base);
+		font-size: var(--font-sm);
 	}
 
 	/* Ecosystem */
