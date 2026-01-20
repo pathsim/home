@@ -61,7 +61,7 @@
 		position: sticky;
 		top: 0;
 		z-index: 100;
-		background: var(--surface);
+		background: var(--surface-raised);
 		border-bottom: 1px solid var(--border);
 	}
 
@@ -103,6 +103,6 @@
 
 	.icon-btn:hover {
 		color: var(--text);
-		background: var(--surface-raised);
+		background: var(--surface-hover);
 	}
 </style>
