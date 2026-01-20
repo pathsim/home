@@ -87,22 +87,6 @@
 	nav {
 		display: flex;
 		align-items: center;
-		gap: var(--space-sm);
-	}
-
-	.icon-btn {
-		padding: var(--space-sm);
-		background: transparent;
-		color: var(--text-muted);
-		border-radius: var(--radius-sm);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		text-decoration: none;
-	}
-
-	.icon-btn:hover {
-		color: var(--text);
-		background: var(--surface-hover);
+		gap: var(--space-xs);
 	}
 </style>
