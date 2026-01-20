@@ -395,7 +395,7 @@ S.plot()</code></pre>
 	}
 
 	.ecosystem-card img {
-		height: 48px;
+		height: 80px;
 		width: auto;
 	}
 
