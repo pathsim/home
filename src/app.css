@@ -244,6 +244,14 @@ button.ghost:hover {
 	height: 24px;
 }
 
+/* Separator - full screen width */
+.separator {
+	height: 1px;
+	background: var(--border);
+	width: 100vw;
+	margin-left: calc(-50vw + 50%);
+}
+
 /* Action card link - vertical icon + label style */
 .action-card {
 	display: flex;
