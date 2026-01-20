@@ -89,6 +89,11 @@
 		<line x1="5" y1="12" x2="19" y2="12"/>
 		<polyline points="12 5 19 12 12 19"/>
 	</svg>
+{:else if name === 'book'}
+	<svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+		<path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+	</svg>
 {:else}
 	<span>{name}</span>
 {/if}

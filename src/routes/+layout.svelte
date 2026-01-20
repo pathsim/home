@@ -2,6 +2,7 @@
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import Icon from '$lib/components/Icon.svelte';
+	import Tooltip, { tooltip } from '$lib/components/Tooltip.svelte';
 
 	let { children } = $props();
 
@@ -24,19 +25,25 @@
 	}
 </script>
 
+<Tooltip />
+
 <div class="app">
 	<header>
 		<div class="header-content">
-			<a href="/" class="logo">
+			<a href="/" class="logo" use:tooltip={'Home'}>
 				<img src="/favicon.png" alt="PathSim" />
 			</a>
 			<nav>
-				<a href="https://docs.pathsim.org">Docs</a>
-				<a href="https://view.pathsim.org">Editor</a>
-				<a href="https://github.com/milanofthe/pathsim">
+				<a href="https://docs.pathsim.org" class="icon-btn" use:tooltip={'Documentation'}>
+					<Icon name="book" size={20} />
+				</a>
+				<a href="https://view.pathsim.org" class="icon-btn" use:tooltip={'Editor'}>
+					<Icon name="play" size={20} />
+				</a>
+				<a href="https://github.com/milanofthe/pathsim" class="icon-btn" use:tooltip={'GitHub'}>
 					<Icon name="github" size={20} />
 				</a>
-				<button class="theme-toggle" onclick={toggleTheme} aria-label="Toggle theme">
+				<button class="icon-btn" onclick={toggleTheme} use:tooltip={'Toggle theme'}>
 					<Icon name={theme === 'dark' ? 'sun' : 'moon'} size={20} />
 				</button>
 			</nav>
@@ -80,28 +87,21 @@
 	nav {
 		display: flex;
 		align-items: center;
-		gap: var(--space-lg);
+		gap: var(--space-sm);
 	}
 
-	nav a {
-		color: var(--text-muted);
-		font-size: var(--font-sm);
-		font-weight: 500;
-		transition: color var(--transition-fast);
-	}
-
-	nav a:hover {
-		color: var(--text);
-	}
-
-	.theme-toggle {
+	.icon-btn {
 		padding: var(--space-sm);
 		background: transparent;
 		color: var(--text-muted);
 		border-radius: var(--radius-sm);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
 	}
 
-	.theme-toggle:hover {
+	.icon-btn:hover {
 		color: var(--text);
 		background: var(--surface-raised);
 	}
