@@ -11,6 +11,7 @@ export const external = {
 export const packages = {
 	pathsim: {
 		name: 'PathSim',
+		shortName: 'pathsim',
 		logo: '/pathsim_logo.png',
 		docs: `${external.docs}/pathsim`,
 		api: `${external.docs}/pathsim/api`,
@@ -20,6 +21,7 @@ export const packages = {
 	},
 	chem: {
 		name: 'PathSim-Chem',
+		shortName: 'chem',
 		logo: '/pathsim_chem_logo.png',
 		docs: `${external.docs}/chem`,
 		api: `${external.docs}/chem/api`,
@@ -29,6 +31,7 @@ export const packages = {
 	},
 	vehicle: {
 		name: 'PathSim-Vehicle',
+		shortName: 'vehicle',
 		logo: '/pathsim_vehicle_logo.png',
 		docs: `${external.docs}/vehicle`,
 		api: `${external.docs}/vehicle/api`,
@@ -38,6 +41,7 @@ export const packages = {
 	},
 	pathview: {
 		name: 'PathView',
+		shortName: 'pathview',
 		logo: '/pathview_logo.png',
 		app: external.view,
 		github: `${external.github}/pathview`

@@ -188,7 +188,7 @@ scope.plot()`;
 		<div class="ecosystem-grid">
 			<div class="ecosystem-card">
 				<div class="panel-header">
-					<span>{packages.pathview.name}</span>
+					<span>{packages.pathview.shortName}</span>
 					<div class="header-actions">
 						<a href={packages.pathview.app} class="icon-btn" use:tooltip={'App'}>
 							<Icon name="play" size={14} />
@@ -204,7 +204,7 @@ scope.plot()`;
 			</div>
 			<div class="ecosystem-card">
 				<div class="panel-header">
-					<span>{packages.pathsim.name}</span>
+					<span>{packages.pathsim.shortName}</span>
 					<div class="header-actions">
 						<a href={packages.pathsim.api} class="icon-btn" use:tooltip={'API'}>
 							<Icon name="braces" size={14} />
@@ -229,7 +229,7 @@ scope.plot()`;
 			</div>
 			<div class="ecosystem-card">
 				<div class="panel-header">
-					<span>{packages.chem.name}</span>
+					<span>{packages.chem.shortName}</span>
 					<div class="header-actions">
 						<a href={packages.chem.api} class="icon-btn" use:tooltip={'API'}>
 							<Icon name="braces" size={14} />
@@ -254,7 +254,7 @@ scope.plot()`;
 			</div>
 			<div class="ecosystem-card">
 				<div class="panel-header">
-					<span>{packages.vehicle.name}</span>
+					<span>{packages.vehicle.shortName}</span>
 					<div class="header-actions">
 						<a href={packages.vehicle.api} class="icon-btn" use:tooltip={'API'}>
 							<Icon name="braces" size={14} />
