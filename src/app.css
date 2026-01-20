@@ -73,7 +73,7 @@
 
 /* Light Theme */
 [data-theme='light'] {
-	--surface: #f8f8fc;
+	--surface: #f0f0f4;
 	--surface-raised: #ffffff;
 	--surface-hover: color-mix(in srgb, var(--surface-raised) 90%, black);
 

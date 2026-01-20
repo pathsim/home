@@ -295,12 +295,12 @@ S.plot()</code></pre>
 		border: 1px solid var(--border);
 		border-radius: var(--radius-lg);
 		padding: var(--space-xl);
-		transition: all var(--transition-normal);
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 	}
 
 	.feature-card:hover {
-		border-color: var(--border-focus);
-		transform: translateY(-2px);
+		border-color: var(--accent);
+		box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
 	}
 
 	.feature-card h3 {
@@ -380,7 +380,7 @@ S.plot()</code></pre>
 		padding: var(--space-xl);
 		text-decoration: none;
 		color: inherit;
-		transition: all var(--transition-normal);
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -390,7 +390,7 @@ S.plot()</code></pre>
 
 	.ecosystem-card:hover {
 		border-color: var(--accent);
-		transform: translateY(-2px);
+		box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
 		text-decoration: none;
 	}
 
