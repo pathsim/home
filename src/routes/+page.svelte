@@ -25,8 +25,8 @@
 	<!-- Hero Section -->
 	<section class="hero">
 		<div class="hero-content">
-			<h1>PathSim</h1>
-			<p class="tagline">A Python framework for simulating dynamical systems</p>
+			<img src="/pathsim_logo.png" alt="PathSim" class="hero-logo" />
+			<p class="tagline">Python native System modeling</p>
 			<p class="description">
 				Build, simulate, and analyze continuous-time, discrete-time, and hybrid systems
 				using intuitive block diagrams. From simple ODEs to complex multi-domain simulations.
@@ -34,6 +34,7 @@
 			<div class="hero-actions">
 				<a href="https://docs.pathsim.org/pathsim/getting-started" class="btn primary">
 					Get Started
+					<Icon name="arrow-right" size={18} />
 				</a>
 				<a href="https://view.pathsim.org" class="btn secondary">
 					<Icon name="play" size={18} />
@@ -70,44 +71,26 @@ S.plot()</code></pre>
 		<h2>Why PathSim?</h2>
 		<div class="feature-grid">
 			<div class="feature-card">
-				<div class="feature-icon">
-					<Icon name="box" size={28} />
-				</div>
 				<h3>Block-Based Modeling</h3>
 				<p>Build systems from reusable blocks: integrators, filters, controllers, and more. Connect them visually or programmatically.</p>
 			</div>
 			<div class="feature-card">
-				<div class="feature-icon">
-					<Icon name="cpu" size={28} />
-				</div>
 				<h3>Multiple Solvers</h3>
 				<p>18 ODE solvers including explicit, implicit, and adaptive methods. Choose the right solver for your problem.</p>
 			</div>
 			<div class="feature-card">
-				<div class="feature-icon">
-					<Icon name="zap" size={28} />
-				</div>
 				<h3>Event Handling</h3>
 				<p>Zero-crossing detection, scheduled events, and state-dependent triggers for discontinuous systems.</p>
 			</div>
 			<div class="feature-card">
-				<div class="feature-icon">
-					<Icon name="layers" size={28} />
-				</div>
 				<h3>Hierarchical Models</h3>
 				<p>Organize complex systems with subsystems. Create reusable components and build libraries.</p>
 			</div>
 			<div class="feature-card">
-				<div class="feature-icon">
-					<Icon name="activity" size={28} />
-				</div>
 				<h3>Browser-Based Editor</h3>
 				<p>Design systems visually with PathView. Run simulations directly in your browser with Pyodide.</p>
 			</div>
 			<div class="feature-card">
-				<div class="feature-icon">
-					<Icon name="external-link" size={28} />
-				</div>
 				<h3>Domain Toolboxes</h3>
 				<p>Specialized blocks for chemical engineering (PathSim-Chem) and vehicle dynamics (PathSim-Vehicle).</p>
 			</div>
@@ -144,19 +127,19 @@ S.plot()</code></pre>
 		<h2>Ecosystem</h2>
 		<div class="ecosystem-grid">
 			<a href="https://docs.pathsim.org/pathsim" class="ecosystem-card">
-				<h3>PathSim</h3>
+				<img src="/pathsim_logo.png" alt="PathSim" />
 				<p>Core simulation framework</p>
 			</a>
-			<a href="https://docs.pathsim.org/chem" class="ecosystem-card chem">
-				<h3>PathSim-Chem</h3>
+			<a href="https://docs.pathsim.org/chem" class="ecosystem-card">
+				<img src="/pathsim_chem_logo.png" alt="PathSim-Chem" />
 				<p>Chemical engineering toolbox</p>
 			</a>
-			<a href="https://docs.pathsim.org/vehicle" class="ecosystem-card vehicle">
-				<h3>PathSim-Vehicle</h3>
+			<a href="https://docs.pathsim.org/vehicle" class="ecosystem-card">
+				<img src="/pathsim_vehicle_logo.png" alt="PathSim-Vehicle" />
 				<p>Vehicle dynamics toolbox</p>
 			</a>
-			<a href="https://view.pathsim.org" class="ecosystem-card view">
-				<h3>PathView</h3>
+			<a href="https://view.pathsim.org" class="ecosystem-card">
+				<img src="/pathview_logo.png" alt="PathView" />
 				<p>Browser-based visual editor</p>
 			</a>
 		</div>
@@ -213,13 +196,17 @@ S.plot()</code></pre>
 		}
 	}
 
-	.hero h1 {
-		font-size: var(--font-5xl);
-		background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
+	.hero-logo {
+		height: 64px;
+		width: auto;
 		margin-bottom: var(--space-lg);
+	}
+
+	@media (max-width: 900px) {
+		.hero-logo {
+			margin-left: auto;
+			margin-right: auto;
+		}
 	}
 
 	.tagline {
@@ -292,8 +279,8 @@ S.plot()</code></pre>
 		overflow-x: auto;
 	}
 
-	.code-example .kw { color: #E57373; }
-	.code-example .num { color: #4DB6AC; }
+	.code-example .kw { color: var(--accent); }
+	.code-example .num { color: var(--accent); }
 	.code-example .cm { color: var(--text-disabled); }
 
 	/* Features */
@@ -316,21 +303,10 @@ S.plot()</code></pre>
 		transform: translateY(-2px);
 	}
 
-	.feature-icon {
-		width: 48px;
-		height: 48px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: var(--accent-bg);
-		color: var(--accent);
-		border-radius: var(--radius-md);
-		margin-bottom: var(--space-lg);
-	}
-
 	.feature-card h3 {
 		font-size: var(--font-lg);
 		margin-bottom: var(--space-sm);
+		color: var(--accent);
 	}
 
 	.feature-card p {
@@ -405,7 +381,11 @@ S.plot()</code></pre>
 		text-decoration: none;
 		color: inherit;
 		transition: all var(--transition-normal);
-		border-top: 3px solid var(--accent);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: var(--space-md);
 	}
 
 	.ecosystem-card:hover {
@@ -414,21 +394,9 @@ S.plot()</code></pre>
 		text-decoration: none;
 	}
 
-	.ecosystem-card.chem {
-		border-top-color: #81C784;
-	}
-
-	.ecosystem-card.vehicle {
-		border-top-color: #FFB74D;
-	}
-
-	.ecosystem-card.view {
-		border-top-color: #64B5F6;
-	}
-
-	.ecosystem-card h3 {
-		font-size: var(--font-lg);
-		margin-bottom: var(--space-xs);
+	.ecosystem-card img {
+		height: 40px;
+		width: auto;
 	}
 
 	.ecosystem-card p {
