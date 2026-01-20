@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import Icon from '$lib/components/Icon.svelte';
 	import Tooltip, { tooltip } from '$lib/components/Tooltip.svelte';
+	import { external, nav } from '$lib/config/links';
 
 	let { children } = $props();
 
@@ -33,18 +34,18 @@
 			<a href="/" class="logo" use:tooltip={'Home'}>
 				<img src="/favicon.png" alt="PathSim" />
 			</a>
-			<nav>
-				<a href="https://docs.pathsim.org" class="icon-btn" use:tooltip={'Documentation'}>
-					<Icon name="book" size={20} />
+			<nav class="header-actions">
+				<a href={nav.docs} class="icon-btn" use:tooltip={'Documentation'}>
+					<Icon name="book" size={14} />
 				</a>
-				<a href="https://view.pathsim.org" class="icon-btn" use:tooltip={'Editor'}>
-					<Icon name="play" size={20} />
+				<a href={nav.tryOnline} class="icon-btn" use:tooltip={'Editor'}>
+					<Icon name="play" size={14} />
 				</a>
-				<a href="https://github.com/milanofthe/pathsim" class="icon-btn" use:tooltip={'GitHub'}>
-					<Icon name="github" size={20} />
+				<a href={nav.github} class="icon-btn" use:tooltip={'GitHub'}>
+					<Icon name="github" size={14} />
 				</a>
 				<button class="icon-btn" onclick={toggleTheme} use:tooltip={'Toggle theme'}>
-					<Icon name={theme === 'dark' ? 'sun' : 'moon'} size={20} />
+					<Icon name={theme === 'dark' ? 'sun' : 'moon'} size={14} />
 				</button>
 			</nav>
 		</div>
@@ -68,7 +69,7 @@
 	.header-content {
 		max-width: 1200px;
 		margin: 0 auto;
-		padding: var(--space-md) var(--space-lg);
+		padding: var(--space-sm) var(--space-lg);
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -80,7 +81,7 @@
 	}
 
 	.logo img {
-		height: 32px;
+		height: 24px;
 		width: auto;
 	}
 

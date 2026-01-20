@@ -24,8 +24,11 @@
 
 	/* ===== STATUS ===== */
 	--success: #22c55e;
+	--success-bg: rgba(34, 197, 94, 0.1);
 	--warning: #eab308;
+	--warning-bg: rgba(234, 179, 8, 0.1);
 	--error: #ef4444;
+	--error-bg: rgba(239, 68, 68, 0.1);
 
 	/* ===== FONTS ===== */
 	--font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
@@ -89,6 +92,7 @@
 	--shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
 	--shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
 	--shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+	--shadow-glow: 0 0 20px rgba(0, 112, 192, 0.25);
 }
 
 /* Reset */
@@ -234,6 +238,66 @@ button.ghost:hover {
 	color: var(--text);
 }
 
+/* Smaller icon buttons in header actions */
+.header-actions .icon-btn {
+	width: 24px;
+	height: 24px;
+}
+
+/* Action card link - vertical icon + label style */
+.action-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 12px;
+	background: transparent;
+	border: none;
+	border-radius: var(--radius-md);
+	color: var(--text-muted);
+	text-decoration: none;
+}
+
+.action-card svg {
+	color: var(--accent);
+	transition: transform 0.15s ease;
+}
+
+.action-card:hover svg {
+	transform: scale(1.2);
+}
+
+.action-card:hover {
+	color: var(--text-muted);
+	text-decoration: none;
+}
+
+.action-card .action-label {
+	font-size: 11px;
+	font-weight: 500;
+}
+
+/* Panel header - light header for cards/panels */
+.panel-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--space-sm) var(--space-lg);
+	background: var(--surface-raised);
+	border-bottom: 1px solid var(--border);
+	font-size: 11px;
+	font-weight: 600;
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+/* Panel body - dark body for cards/panels */
+.panel-body {
+	padding: var(--space-lg);
+	background: var(--surface);
+}
+
 /* Dialog/Modal backdrop */
 .dialog-backdrop {
 	position: fixed;
@@ -309,4 +373,84 @@ button.ghost:hover {
 :focus-visible {
 	outline: 2px solid var(--accent);
 	outline-offset: 2px;
+}
+
+/* CodeMirror editor styling */
+.cm-editor {
+	height: 100%;
+	font-size: 12px;
+	background: var(--surface);
+}
+
+.cm-scroller {
+	font-family: var(--font-mono);
+	font-weight: 500;
+}
+
+.cm-content {
+	padding: 8px 0;
+	caret-color: var(--accent);
+}
+
+/* Cursor styling */
+.cm-cursor {
+	border-left-color: var(--accent) !important;
+	border-left-width: 2px !important;
+}
+
+/* Gutter styling - !important to override oneDark theme */
+.cm-gutters {
+	background: var(--surface) !important;
+	border-right: 1px solid var(--border) !important;
+	color: var(--text-disabled) !important;
+}
+
+.cm-lineNumbers .cm-gutterElement {
+	padding: 0 8px 0 12px;
+}
+
+.cm-activeLineGutter {
+	background: transparent !important;
+	color: var(--text-muted) !important;
+}
+
+.cm-activeLine {
+	background: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Selection highlight */
+.cm-selectionBackground {
+	background: var(--accent-bg) !important;
+}
+
+.cm-focused .cm-selectionBackground {
+	background: var(--accent-bg) !important;
+}
+
+/* CodeMirror light theme */
+[data-theme="light"] .cm-editor {
+	background-color: var(--surface);
+}
+
+[data-theme="light"] .cm-gutters {
+	background-color: var(--surface) !important;
+	border-right: 1px solid var(--border) !important;
+	color: var(--text-disabled) !important;
+}
+
+[data-theme="light"] .cm-activeLineGutter {
+	background-color: transparent !important;
+	color: var(--text-muted) !important;
+}
+
+[data-theme="light"] .cm-activeLine {
+	background-color: rgba(0, 0, 0, 0.03) !important;
+}
+
+[data-theme="light"] .cm-selectionBackground {
+	background: var(--accent-bg) !important;
+}
+
+[data-theme="light"] .cm-focused .cm-selectionBackground {
+	background: var(--accent-bg) !important;
 }

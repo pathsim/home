@@ -1,25 +1,95 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import Icon from '$lib/components/Icon.svelte';
+	import Tooltip, { tooltip } from '$lib/components/Tooltip.svelte';
+	import { loadCodeMirrorModules, createEditorExtensions, type CodeMirrorModules } from '$lib/utils/codemirror';
+	import { packages, nav, footer } from '$lib/config/links';
 
 	let copiedPip = $state(false);
 	let copiedConda = $state(false);
+	let copiedCode = $state(false);
 
-	function copyToClipboard(text: string, type: 'pip' | 'conda') {
+	let editorContainer = $state<HTMLDivElement | undefined>(undefined);
+	let editorView: import('@codemirror/view').EditorView | null = null;
+	let cmModules: CodeMirrorModules | null = null;
+	let editorLoading = $state(true);
+
+	const exampleCode = `from pathsim import Simulation, Connection
+from pathsim.blocks import Integrator, Amplifier, Scope
+
+# blocks
+integ = Integrator(1.0)
+amp = Amplifier(-0.5)
+scope = Scope()
+
+# connections (feedback loop)
+connections = [
+    Connection(integ, amp, scope),
+    Connection(amp, integ)
+]
+
+# simulate
+sim = Simulation([integ, amp, scope], connections)
+sim.run(10.0)
+scope.plot()`;
+
+	function copyToClipboard(text: string, type: 'pip' | 'conda' | 'code') {
 		navigator.clipboard.writeText(text);
 		if (type === 'pip') {
 			copiedPip = true;
 			setTimeout(() => (copiedPip = false), 2000);
-		} else {
+		} else if (type === 'conda') {
 			copiedConda = true;
 			setTimeout(() => (copiedConda = false), 2000);
+		} else {
+			copiedCode = true;
+			setTimeout(() => (copiedCode = false), 2000);
 		}
 	}
+
+	onMount(async () => {
+		if (!editorContainer) return;
+
+		cmModules = await loadCodeMirrorModules();
+
+		const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+
+		editorView = new cmModules.EditorView({
+			doc: exampleCode,
+			extensions: createEditorExtensions(cmModules, isDark, { readOnly: true }),
+			parent: editorContainer
+		});
+
+		editorLoading = false;
+
+		// Watch for theme changes
+		const observer = new MutationObserver(() => {
+			if (editorView && cmModules && editorContainer) {
+				const newIsDark = document.documentElement.getAttribute('data-theme') !== 'light';
+				const currentCode = editorView.state.doc.toString();
+				editorView.destroy();
+				editorView = new cmModules.EditorView({
+					doc: currentCode,
+					extensions: createEditorExtensions(cmModules, newIsDark, { readOnly: true }),
+					parent: editorContainer
+				});
+			}
+		});
+		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+		return () => {
+			observer.disconnect();
+			editorView?.destroy();
+		};
+	});
 </script>
 
 <svelte:head>
 	<title>PathSim - Python Framework for Simulating Dynamical Systems</title>
 	<meta name="description" content="PathSim is a Python framework for simulating dynamical systems using block diagrams. Build, simulate, and analyze continuous-time, discrete-time, and hybrid systems." />
 </svelte:head>
+
+<Tooltip />
 
 <main>
 	<!-- Hero Section -->
@@ -32,132 +102,245 @@
 				using intuitive block diagrams. From simple ODEs to complex multi-domain simulations.
 			</p>
 			<div class="hero-actions">
-				<a href="https://docs.pathsim.org/pathsim/getting-started" class="btn primary">
-					Get Started
-					<Icon name="arrow-right" size={18} />
+				<a href={nav.getStarted} class="action-card">
+					<Icon name="zap" size={20} />
+					<span class="action-label">Get Started</span>
 				</a>
-				<a href="https://view.pathsim.org" class="btn secondary">
-					<Icon name="play" size={18} />
-					Try Online
+				<a href={nav.docs} class="action-card">
+					<Icon name="book" size={20} />
+					<span class="action-label">Docs</span>
+				</a>
+				<a href={nav.tryOnline} class="action-card">
+					<Icon name="play" size={20} />
+					<span class="action-label">Try Online</span>
+				</a>
+				<a href={nav.github} class="action-card">
+					<Icon name="github" size={20} />
+					<span class="action-label">GitHub</span>
+				</a>
+				<a href={nav.sponsor} class="action-card">
+					<Icon name="heart" size={20} />
+					<span class="action-label">Sponsor</span>
 				</a>
 			</div>
 		</div>
 		<div class="hero-visual">
-			<pre class="code-example"><code><span class="kw">from</span> pathsim <span class="kw">import</span> Simulation, Connection
-<span class="kw">from</span> pathsim.blocks <span class="kw">import</span> Integrator, Amplifier, Scope
-
-<span class="cm"># Create blocks</span>
-I = Integrator(initial_value=<span class="num">1.0</span>)
-A = Amplifier(gain=<span class="num">-0.5</span>)
-S = Scope()
-
-<span class="cm"># Connect: feedback loop</span>
-connections = [
-    Connection(I, A, S),
-    Connection(A, I)
-]
-
-<span class="cm"># Simulate</span>
-sim = Simulation([I, A, S], connections)
-sim.run(duration=<span class="num">10</span>)
-
-<span class="cm"># Plot results</span>
-S.plot()</code></pre>
-		</div>
-	</section>
-
-	<!-- Features Section -->
-	<section class="features">
-		<h2>Why PathSim?</h2>
-		<div class="feature-grid">
-			<div class="feature-card">
-				<h3>Block-Based Modeling</h3>
-				<p>Build systems from reusable blocks: integrators, filters, controllers, and more. Connect them visually or programmatically.</p>
-			</div>
-			<div class="feature-card">
-				<h3>Multiple Solvers</h3>
-				<p>18 ODE solvers including explicit, implicit, and adaptive methods. Choose the right solver for your problem.</p>
-			</div>
-			<div class="feature-card">
-				<h3>Event Handling</h3>
-				<p>Zero-crossing detection, scheduled events, and state-dependent triggers for discontinuous systems.</p>
-			</div>
-			<div class="feature-card">
-				<h3>Hierarchical Models</h3>
-				<p>Organize complex systems with subsystems. Create reusable components and build libraries.</p>
-			</div>
-			<div class="feature-card">
-				<h3>Browser-Based Editor</h3>
-				<p>Design systems visually with PathView. Run simulations directly in your browser with Pyodide.</p>
-			</div>
-			<div class="feature-card">
-				<h3>Domain Toolboxes</h3>
-				<p>Specialized blocks for chemical engineering (PathSim-Chem) and vehicle dynamics (PathSim-Vehicle).</p>
+			<div class="code-panel">
+				<div class="panel-header code-panel-header">
+					<span>Example</span>
+					<button
+						class="icon-btn"
+						onclick={() => copyToClipboard(exampleCode, 'code')}
+						use:tooltip={copiedCode ? 'Copied!' : 'Copy'}
+					>
+						<Icon name={copiedCode ? 'check' : 'copy'} size={14} />
+					</button>
+				</div>
+				<div class="panel-body code-panel-body" bind:this={editorContainer}>
+					{#if editorLoading}
+						<div class="loading">Loading...</div>
+					{/if}
+				</div>
 			</div>
 		</div>
 	</section>
+
+	<div class="separator"></div>
 
 	<!-- Installation Section -->
 	<section class="installation">
 		<h2>Installation</h2>
-		<div class="install-options">
-			<div class="install-option">
-				<h3>pip</h3>
-				<div class="install-command">
+		<div class="install-grid">
+			<button class="install-card" onclick={() => copyToClipboard('pip install pathsim', 'pip')}>
+				<div class="panel-header">
+					<span>pip</span>
+					<div class="header-actions">
+						<span class="icon-btn" use:tooltip={copiedPip ? 'Copied!' : 'Copy'}>
+							<Icon name={copiedPip ? 'check' : 'copy'} size={14} />
+						</span>
+					</div>
+				</div>
+				<div class="install-body">
 					<code>pip install pathsim</code>
-					<button class="copy-btn" onclick={() => copyToClipboard('pip install pathsim', 'pip')}>
-						<Icon name={copiedPip ? 'check' : 'copy'} size={16} />
-					</button>
 				</div>
-			</div>
-			<div class="install-option">
-				<h3>conda</h3>
-				<div class="install-command">
+			</button>
+			<button class="install-card" onclick={() => copyToClipboard('conda install -c conda-forge pathsim', 'conda')}>
+				<div class="panel-header">
+					<span>conda</span>
+					<div class="header-actions">
+						<span class="icon-btn" use:tooltip={copiedConda ? 'Copied!' : 'Copy'}>
+							<Icon name={copiedConda ? 'check' : 'copy'} size={14} />
+						</span>
+					</div>
+				</div>
+				<div class="install-body">
 					<code>conda install -c conda-forge pathsim</code>
-					<button class="copy-btn" onclick={() => copyToClipboard('conda install -c conda-forge pathsim', 'conda')}>
-						<Icon name={copiedConda ? 'check' : 'copy'} size={16} />
-					</button>
 				</div>
-			</div>
+			</button>
 		</div>
 	</section>
+
+	<div class="separator"></div>
 
 	<!-- Ecosystem Section -->
 	<section class="ecosystem">
 		<h2>Ecosystem</h2>
 		<div class="ecosystem-grid">
-			<a href="https://docs.pathsim.org/pathsim" class="ecosystem-card">
-				<img src="/pathsim_logo.png" alt="PathSim" />
-				<p>Core simulation framework</p>
-			</a>
-			<a href="https://docs.pathsim.org/chem" class="ecosystem-card">
-				<img src="/pathsim_chem_logo.png" alt="PathSim-Chem" />
-				<p>Chemical engineering toolbox</p>
-			</a>
-			<a href="https://docs.pathsim.org/vehicle" class="ecosystem-card">
-				<img src="/pathsim_vehicle_logo.png" alt="PathSim-Vehicle" />
-				<p>Vehicle dynamics toolbox</p>
-			</a>
-			<a href="https://view.pathsim.org" class="ecosystem-card">
-				<img src="/pathview_logo.png" alt="PathView" />
-				<p>Browser-based visual editor</p>
-			</a>
+			<div class="ecosystem-card">
+				<div class="panel-header">
+					<span>{packages.pathview.name}</span>
+					<div class="header-actions">
+						<a href={packages.pathview.app} class="icon-btn" use:tooltip={'App'}>
+							<Icon name="play" size={14} />
+						</a>
+						<a href={packages.pathview.github} class="icon-btn" use:tooltip={'GitHub'}>
+							<Icon name="github" size={14} />
+						</a>
+					</div>
+				</div>
+				<a href={packages.pathview.app} class="ecosystem-body">
+					<img src={packages.pathview.logo} alt={packages.pathview.name} />
+				</a>
+			</div>
+			<div class="ecosystem-card">
+				<div class="panel-header">
+					<span>{packages.pathsim.name}</span>
+					<div class="header-actions">
+						<a href={packages.pathsim.api} class="icon-btn" use:tooltip={'API'}>
+							<Icon name="braces" size={14} />
+						</a>
+						<a href={packages.pathsim.docs} class="icon-btn" use:tooltip={'Docs'}>
+							<Icon name="book" size={14} />
+						</a>
+						<a href={packages.pathsim.pypi} class="icon-btn" use:tooltip={'PyPI'}>
+							<Icon name="package" size={14} />
+						</a>
+						<a href={packages.pathsim.examples} class="icon-btn" use:tooltip={'Examples'}>
+							<Icon name="play" size={14} />
+						</a>
+						<a href={packages.pathsim.github} class="icon-btn" use:tooltip={'GitHub'}>
+							<Icon name="github" size={14} />
+						</a>
+					</div>
+				</div>
+				<a href={packages.pathsim.docs} class="ecosystem-body">
+					<img src={packages.pathsim.logo} alt={packages.pathsim.name} />
+				</a>
+			</div>
+			<div class="ecosystem-card">
+				<div class="panel-header">
+					<span>{packages.chem.name}</span>
+					<div class="header-actions">
+						<a href={packages.chem.api} class="icon-btn" use:tooltip={'API'}>
+							<Icon name="braces" size={14} />
+						</a>
+						<a href={packages.chem.docs} class="icon-btn" use:tooltip={'Docs'}>
+							<Icon name="book" size={14} />
+						</a>
+						<a href={packages.chem.pypi} class="icon-btn" use:tooltip={'PyPI'}>
+							<Icon name="package" size={14} />
+						</a>
+						<a href={packages.chem.examples} class="icon-btn" use:tooltip={'Examples'}>
+							<Icon name="play" size={14} />
+						</a>
+						<a href={packages.chem.github} class="icon-btn" use:tooltip={'GitHub'}>
+							<Icon name="github" size={14} />
+						</a>
+					</div>
+				</div>
+				<a href={packages.chem.docs} class="ecosystem-body">
+					<img src={packages.chem.logo} alt={packages.chem.name} />
+				</a>
+			</div>
+			<div class="ecosystem-card">
+				<div class="panel-header">
+					<span>{packages.vehicle.name}</span>
+					<div class="header-actions">
+						<a href={packages.vehicle.api} class="icon-btn" use:tooltip={'API'}>
+							<Icon name="braces" size={14} />
+						</a>
+						<a href={packages.vehicle.docs} class="icon-btn" use:tooltip={'Docs'}>
+							<Icon name="book" size={14} />
+						</a>
+						<a href={packages.vehicle.pypi} class="icon-btn" use:tooltip={'PyPI'}>
+							<Icon name="package" size={14} />
+						</a>
+						<a href={packages.vehicle.examples} class="icon-btn" use:tooltip={'Examples'}>
+							<Icon name="play" size={14} />
+						</a>
+						<a href={packages.vehicle.github} class="icon-btn" use:tooltip={'GitHub'}>
+							<Icon name="github" size={14} />
+						</a>
+					</div>
+				</div>
+				<a href={packages.vehicle.docs} class="ecosystem-body">
+					<img src={packages.vehicle.logo} alt={packages.vehicle.name} />
+				</a>
+			</div>
 		</div>
 	</section>
 
-	<!-- Footer -->
-	<footer>
-		<div class="footer-content">
-			<div class="footer-links">
-				<a href="https://docs.pathsim.org">Documentation</a>
-				<a href="https://github.com/milanofthe/pathsim">GitHub</a>
-				<a href="https://pypi.org/project/pathsim">PyPI</a>
-				<a href="https://github.com/milanofthe/pathsim/blob/main/LICENSE">MIT License</a>
+	<div class="separator"></div>
+
+	<!-- Features Section -->
+	<section class="features">
+		<h2>Features</h2>
+		<div class="feature-grid">
+			<div class="feature-card">
+				<div class="panel-header">Hot-Swappable</div>
+				<div class="panel-body feature-body">Switch blocks and solvers during active simulation at runtime.</div>
 			</div>
-			<p class="copyright">PathSim</p>
+			<div class="feature-card">
+				<div class="panel-header">MIMO Capable</div>
+				<div class="panel-body feature-body">Multiple input, multiple output ports built into all blocks.</div>
+			</div>
+			<div class="feature-card">
+				<div class="panel-header">18+ Solvers</div>
+				<div class="panel-body feature-body">Implicit, explicit, and adaptive integrators for stiff and non-stiff systems.</div>
+			</div>
+			<div class="feature-card">
+				<div class="panel-header">Hierarchical</div>
+				<div class="panel-body feature-body">Nested subsystems for modular, reusable component design.</div>
+			</div>
+			<div class="feature-card">
+				<div class="panel-header">Event Handling</div>
+				<div class="panel-body feature-body">Zero-crossing detection and scheduled events for hybrid systems.</div>
+			</div>
+			<div class="feature-card">
+				<div class="panel-header">Extensible</div>
+				<div class="panel-body feature-body">Create custom blocks by subclassing the base Block class.</div>
+			</div>
+			<div class="feature-card">
+				<div class="panel-header">Browser Editor</div>
+				<div class="panel-body feature-body">Design and simulate visually with PathView using Pyodide.</div>
+			</div>
+			<div class="feature-card">
+				<div class="panel-header">Domain Toolboxes</div>
+				<div class="panel-body feature-body">Specialized blocks for chemical engineering and vehicle dynamics.</div>
+			</div>
 		</div>
-	</footer>
+	</section>
+
 </main>
+
+<!-- Footer -->
+<footer>
+	<div class="footer-content">
+		<a href={footer.docs} class="footer-link">
+			<Icon name="book" size={14} />
+			<span>Docs</span>
+		</a>
+		<a href={footer.github} class="footer-link">
+			<Icon name="github" size={14} />
+			<span>GitHub</span>
+		</a>
+		<a href={footer.pypi} class="footer-link">
+			<Icon name="package" size={14} />
+			<span>PyPI</span>
+		</a>
+		<span class="footer-text">MIT License</span>
+	</div>
+</footer>
 
 <style>
 	main {
@@ -167,29 +350,36 @@ S.plot()</code></pre>
 	}
 
 	section {
-		padding: var(--space-4xl) 0;
+		padding: var(--space-xl) 0;
+	}
+
+	.separator {
+		height: 1px;
+		background: var(--border);
+		margin: 0 calc(-1 * var(--space-lg));
 	}
 
 	h2 {
-		font-size: var(--font-3xl);
-		text-align: center;
-		margin-bottom: var(--space-3xl);
+		font-size: var(--font-lg);
+		font-weight: 600;
+		color: var(--text-muted);
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		margin-bottom: var(--space-lg);
 	}
 
 	/* Hero */
 	.hero {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: var(--space-4xl);
+		gap: var(--space-3xl);
 		align-items: center;
-		padding: var(--space-4xl) 0;
-		min-height: 80vh;
+		padding: var(--space-2xl) 0;
 	}
 
 	@media (max-width: 900px) {
 		.hero {
 			grid-template-columns: 1fr;
-			text-align: center;
 		}
 		.hero-visual {
 			display: none;
@@ -197,104 +387,95 @@ S.plot()</code></pre>
 	}
 
 	.hero-logo {
-		height: 200px;
+		height: 140px;
 		width: auto;
-		margin-bottom: var(--space-xl);
-	}
-
-	@media (max-width: 900px) {
-		.hero-logo {
-			margin-left: auto;
-			margin-right: auto;
-		}
-	}
-
-	.tagline {
-		font-size: var(--font-2xl);
-		color: var(--text-muted);
 		margin-bottom: var(--space-lg);
 	}
 
-	.description {
+	.tagline {
 		font-size: var(--font-lg);
+		font-weight: 600;
 		color: var(--text-muted);
-		margin-bottom: var(--space-2xl);
-		max-width: 500px;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		margin-bottom: var(--space-md);
+	}
+
+	.description {
+		font-size: var(--font-base);
+		color: var(--text);
+		margin-bottom: var(--space-xl);
+		max-width: 450px;
 	}
 
 	.hero-actions {
 		display: flex;
-		gap: var(--space-lg);
+		gap: var(--space-xs);
 	}
 
-	@media (max-width: 900px) {
-		.hero-actions {
-			justify-content: center;
-		}
-		.description {
-			margin: 0 auto var(--space-2xl);
-		}
-	}
 
-	.btn {
-		display: inline-flex;
-		align-items: center;
-		gap: var(--space-sm);
-		padding: var(--space-md) var(--space-xl);
+	.code-panel {
+		display: flex;
+		flex-direction: column;
+		border: 1px solid var(--border);
 		border-radius: var(--radius-md);
-		font-weight: 500;
-		font-size: var(--font-md);
-		text-decoration: none;
-		transition: all var(--transition-fast);
+		overflow: hidden;
 	}
 
-	.btn.primary {
-		background: var(--accent);
-		color: white;
+	.code-panel-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: var(--space-xs) var(--space-md);
 	}
 
-	.btn.primary:hover {
-		background: var(--accent-hover);
-		text-decoration: none;
+	.code-panel-header .icon-btn {
+		width: 24px;
+		height: 24px;
 	}
 
-	.btn.secondary {
-		background: var(--surface-raised);
-		color: var(--text);
-		border: 1px solid var(--border);
+	.code-panel-body {
+		min-height: 200px;
+		padding: 0;
 	}
 
-	.btn.secondary:hover {
-		border-color: var(--border-focus);
-		text-decoration: none;
+	.code-panel-body .loading {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 200px;
+		color: var(--text-muted);
+		font-size: 12px;
 	}
 
-	.code-example {
-		background: var(--surface-raised);
-		border: 1px solid var(--border);
-		border-radius: var(--radius-lg);
-		padding: var(--space-xl);
-		font-size: 13px;
-		line-height: 1.6;
-		overflow-x: auto;
+	.code-panel-body :global(.cm-editor) {
+		height: auto;
+		max-height: 400px;
 	}
-
-	.code-example .kw { color: var(--accent); }
-	.code-example .num { color: var(--accent); }
-	.code-example .cm { color: var(--text-disabled); }
 
 	/* Features */
 	.feature-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: var(--space-xl);
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--space-lg);
+	}
+
+	@media (max-width: 1024px) {
+		.feature-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 600px) {
+		.feature-grid {
+			grid-template-columns: 1fr;
+		}
 	}
 
 	.feature-card {
-		background: var(--surface-raised);
 		border: 1px solid var(--border);
 		border-radius: var(--radius-lg);
-		padding: var(--space-xl);
+		overflow: hidden;
 		transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 	}
 
@@ -303,141 +484,158 @@ S.plot()</code></pre>
 		box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
 	}
 
-	.feature-card h3 {
-		font-size: var(--font-lg);
-		margin-bottom: var(--space-sm);
-		color: var(--accent);
-	}
-
-	.feature-card p {
+	.feature-body {
 		color: var(--text-muted);
-		font-size: var(--font-base);
-		margin: 0;
 	}
 
 	/* Installation */
-	.install-options {
+	.install-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--space-lg);
+		max-width: 700px;
+		margin: 0 auto;
+	}
+
+	@media (max-width: 600px) {
+		.install-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.install-card {
 		display: flex;
-		gap: var(--space-xl);
-		justify-content: center;
-		flex-wrap: wrap;
-	}
-
-	.install-option {
-		background: var(--surface-raised);
-		border: 1px solid var(--border);
+		flex-direction: column;
 		border-radius: var(--radius-lg);
-		padding: var(--space-xl);
-		min-width: 300px;
+		border: 1px solid var(--border);
+		overflow: hidden;
+		background: transparent;
+		padding: 0;
+		text-align: left;
+		cursor: pointer;
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 	}
 
-	.install-option h3 {
-		font-size: var(--font-sm);
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		color: var(--text-muted);
-		margin-bottom: var(--space-md);
+	.install-card:hover {
+		border-color: var(--accent);
+		box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
 	}
 
-	.install-command {
+	.install-card .panel-header,
+	.install-card .install-body {
+		width: 100%;
+	}
+
+	.install-body {
 		display: flex;
 		align-items: center;
-		gap: var(--space-md);
+		justify-content: center;
+		padding: var(--space-lg);
 		background: var(--surface);
-		padding: var(--space-md);
-		border-radius: var(--radius-md);
 	}
 
-	.install-command code {
-		flex: 1;
+	.install-body code {
 		background: none;
 		border: none;
 		padding: 0;
 		font-size: var(--font-base);
 	}
 
-	.copy-btn {
-		padding: var(--space-sm);
-		background: transparent;
-		color: var(--text-muted);
-	}
-
-	.copy-btn:hover {
-		color: var(--text);
-	}
-
 	/* Ecosystem */
 	.ecosystem-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		grid-template-columns: repeat(3, 1fr);
 		gap: var(--space-lg);
 	}
 
+	@media (max-width: 900px) {
+		.ecosystem-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 600px) {
+		.ecosystem-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
 	.ecosystem-card {
-		background: var(--surface-raised);
-		border: 1px solid var(--border);
 		border-radius: var(--radius-lg);
-		padding: var(--space-xl);
-		text-decoration: none;
-		color: inherit;
+		border: 1px solid var(--border);
+		overflow: hidden;
 		transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		text-align: center;
-		gap: var(--space-md);
 	}
 
 	.ecosystem-card:hover {
 		border-color: var(--accent);
 		box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
+	}
+
+	.header-actions {
+		display: flex;
+		gap: var(--space-xs);
+	}
+
+	.ecosystem-body {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: var(--space-xl);
+		background: var(--surface);
 		text-decoration: none;
 	}
 
-	.ecosystem-card img {
-		height: 120px;
+	.ecosystem-body img {
+		height: 100px;
 		width: auto;
-	}
-
-	.ecosystem-card p {
-		color: var(--text-muted);
-		font-size: var(--font-sm);
-		margin: 0;
+		object-fit: contain;
 	}
 
 	/* Footer */
 	footer {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: var(--surface-raised);
 		border-top: 1px solid var(--border);
-		padding: var(--space-2xl) 0;
-		margin-top: var(--space-4xl);
+		z-index: 100;
+	}
+
+	/* Add padding to main to account for fixed footer */
+	main {
+		padding-bottom: 48px;
 	}
 
 	.footer-content {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: var(--space-sm) var(--space-lg);
 		display: flex;
-		justify-content: space-between;
 		align-items: center;
-		flex-wrap: wrap;
+		justify-content: center;
 		gap: var(--space-lg);
 	}
 
-	.footer-links {
+	.footer-link {
 		display: flex;
-		gap: var(--space-xl);
-		flex-wrap: wrap;
-	}
-
-	.footer-links a {
+		align-items: center;
+		gap: var(--space-xs);
 		color: var(--text-muted);
-		font-size: var(--font-sm);
+		font-size: 11px;
+		font-weight: 500;
+		text-decoration: none;
 	}
 
-	.footer-links a:hover {
+	.footer-link:hover {
 		color: var(--text);
+		text-decoration: none;
 	}
 
-	.copyright {
-		color: var(--text-disabled);
-		font-size: var(--font-sm);
-		margin: 0;
+	.footer-text {
+		color: var(--text-muted);
+		font-size: 11px;
+		font-weight: 500;
 	}
 </style>

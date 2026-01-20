@@ -390,6 +390,21 @@
 		<polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
 		<line x1="12" y1="22.08" x2="12" y2="12"/>
 	</svg>
+{:else if name === 'package'}
+	<svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+		<line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/>
+		<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+		<polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+		<line x1="12" y1="22.08" x2="12" y2="12"/>
+	</svg>
+{:else if name === 'scale'}
+	<svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M16 16l3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1z"/>
+		<path d="M2 16l3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1z"/>
+		<path d="M7 21h10"/>
+		<path d="M12 3v18"/>
+		<path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>
+	</svg>
 {:else if name === 'flask'}
 	<svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 		<path d="M9 3h6"/>
