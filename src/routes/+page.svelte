@@ -360,6 +360,7 @@
 		border: 1px solid var(--border);
 		border-radius: var(--radius-md);
 		overflow: hidden;
+		text-align: left;
 	}
 
 	.code-panel-header {
