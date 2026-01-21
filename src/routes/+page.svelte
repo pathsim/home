@@ -309,10 +309,15 @@
 		height: 24px;
 	}
 
-	.code-panel-body {
+	.code-panel-body,
+	.code-panel-body:focus,
+	.code-panel-body:focus-visible,
+	.code-panel-body:focus-within {
 		min-height: 200px;
 		padding: 0;
 		outline: none !important;
+		outline-width: 0 !important;
+		box-shadow: none !important;
 	}
 
 	.code-panel-body .loading {
