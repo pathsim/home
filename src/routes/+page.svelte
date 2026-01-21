@@ -110,7 +110,7 @@
 						<Icon name={copiedCode ? 'check' : 'copy'} size={14} />
 					</button>
 				</div>
-				<div class="panel-body code-panel-body" bind:this={editorContainer}>
+				<div class="panel-body code-panel-body" bind:this={editorContainer} tabindex="-1">
 					{#if editorLoading}
 						<div class="loading">Loading...</div>
 					{/if}
@@ -309,15 +309,20 @@
 		height: 24px;
 	}
 
-	.code-panel-body,
+	.code-panel-body {
+		min-height: 200px;
+		padding: 0;
+		outline: 0 !important;
+		outline-style: none !important;
+		border: none;
+	}
+
 	.code-panel-body:focus,
 	.code-panel-body:focus-visible,
 	.code-panel-body:focus-within {
-		min-height: 200px;
-		padding: 0;
-		outline: none !important;
-		outline-width: 0 !important;
-		box-shadow: none !important;
+		outline: 0 !important;
+		outline-style: none !important;
+		-webkit-focus-ring-color: transparent;
 	}
 
 	.code-panel-body .loading {
