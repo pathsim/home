@@ -328,6 +328,11 @@
 		max-height: 400px;
 	}
 
+	.code-panel-body :global(*:focus),
+	.code-panel-body :global(*:focus-visible) {
+		outline: none !important;
+	}
+
 	/* Features */
 	.feature-grid {
 		display: grid;
