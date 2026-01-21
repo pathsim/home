@@ -48,7 +48,6 @@ export const packages: Record<string, PackageConfig> = {
 		logo: '/pathsim_chem_logo.png',
 		docs: `${external.docs}/chem`,
 		api: `${external.docs}/chem/api`,
-		examples: `${external.docs}/chem/examples`,
 		pypi: `${external.pypi}/pathsim-chem`,
 		github: `${external.github}/pathsim-chem`
 	},
@@ -58,8 +57,6 @@ export const packages: Record<string, PackageConfig> = {
 		logo: '/pathsim_vehicle_logo.png',
 		docs: `${external.docs}/vehicle`,
 		api: `${external.docs}/vehicle/api`,
-		examples: `${external.docs}/vehicle/examples`,
-		pypi: `${external.pypi}/pathsim-vehicle`,
 		github: `${external.github}/pathsim-vehicle`
 	},
 	pathview: {

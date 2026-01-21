@@ -45,8 +45,6 @@
 
 	.header-content {
 		height: 100%;
-		max-width: var(--content-max-width);
-		margin: 0 auto;
 		padding: 0 var(--space-lg);
 		display: flex;
 		align-items: center;
@@ -59,8 +57,8 @@
 	}
 
 	.logo img {
-		height: 24px;
-		width: auto;
+		height: 14px;
+		width: 14px;
 	}
 
 	nav {

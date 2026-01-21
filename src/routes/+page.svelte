@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import Icon from '$lib/components/common/Icon.svelte';
 	import { tooltip } from '$lib/components/common/Tooltip.svelte';
 	import { loadCodeMirrorModules, createEditorExtensions, type CodeMirrorModules } from '$lib/utils/codemirror';
-	import { packages, nav, footer, hero, installation, features, exampleCode } from '$lib/config/config';
+	import { packages, packageOrder, nav, footer, hero, installation, features, exampleCode } from '$lib/config/config';
 	import { copyToClipboard } from '$lib/utils/clipboard';
 
 	let copiedPip = $state(false);
@@ -14,6 +14,7 @@
 	let editorView: import('@codemirror/view').EditorView | null = null;
 	let cmModules: CodeMirrorModules | null = null;
 	let editorLoading = $state(true);
+	let themeObserver: MutationObserver | null = null;
 
 	function handleCopy(text: string, type: 'pip' | 'conda' | 'code') {
 		const setters = {
@@ -40,7 +41,7 @@
 		editorLoading = false;
 
 		// Watch for theme changes
-		const observer = new MutationObserver(() => {
+		themeObserver = new MutationObserver(() => {
 			if (editorView && cmModules && editorContainer) {
 				const newIsDark = document.documentElement.getAttribute('data-theme') !== 'light';
 				const currentCode = editorView.state.doc.toString();
@@ -52,12 +53,12 @@
 				});
 			}
 		});
-		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+		themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+	});
 
-		return () => {
-			observer.disconnect();
-			editorView?.destroy();
-		};
+	onDestroy(() => {
+		themeObserver?.disconnect();
+		editorView?.destroy();
 	});
 </script>
 
@@ -158,97 +159,45 @@
 	<section class="ecosystem">
 		<h2>Ecosystem</h2>
 		<div class="ecosystem-grid">
-			<div class="ecosystem-card">
-				<div class="panel-header">
-					<span>{packages.pathview.shortName}</span>
-					<div class="header-actions">
-						<a href={packages.pathview.app} class="icon-btn" use:tooltip={'App'}>
-							<Icon name="play" size={14} />
-						</a>
-						<a href={packages.pathview.github} class="icon-btn" use:tooltip={'GitHub'}>
-							<Icon name="github" size={14} />
-						</a>
+			{#each packageOrder as pkgId}
+				{@const pkg = packages[pkgId]}
+				<div class="ecosystem-card">
+					<div class="panel-header">
+						<span>{pkg.shortName}</span>
+						<div class="header-actions">
+							{#if pkg.app}
+								<a href={pkg.app} class="icon-btn" use:tooltip={'App'}>
+									<Icon name="play" size={14} />
+								</a>
+							{/if}
+							{#if pkg.api}
+								<a href={pkg.api} class="icon-btn" use:tooltip={'API'}>
+									<Icon name="braces" size={14} />
+								</a>
+							{/if}
+							<a href={pkg.docs} class="icon-btn" use:tooltip={'Docs'}>
+								<Icon name="book" size={14} />
+							</a>
+							{#if pkg.pypi}
+								<a href={pkg.pypi} class="icon-btn" use:tooltip={'PyPI'}>
+									<Icon name="package" size={14} />
+								</a>
+							{/if}
+							{#if pkg.examples}
+								<a href={pkg.examples} class="icon-btn" use:tooltip={'Examples'}>
+									<Icon name="file-text" size={14} />
+								</a>
+							{/if}
+							<a href={pkg.github} class="icon-btn" use:tooltip={'GitHub'}>
+								<Icon name="github" size={14} />
+							</a>
+						</div>
 					</div>
+					<a href={pkg.app || pkg.docs} class="ecosystem-body">
+						<img src={pkg.logo} alt={pkg.name} />
+					</a>
 				</div>
-				<a href={packages.pathview.app} class="ecosystem-body">
-					<img src={packages.pathview.logo} alt={packages.pathview.name} />
-				</a>
-			</div>
-			<div class="ecosystem-card">
-				<div class="panel-header">
-					<span>{packages.pathsim.shortName}</span>
-					<div class="header-actions">
-						<a href={packages.pathsim.api} class="icon-btn" use:tooltip={'API'}>
-							<Icon name="braces" size={14} />
-						</a>
-						<a href={packages.pathsim.docs} class="icon-btn" use:tooltip={'Docs'}>
-							<Icon name="book" size={14} />
-						</a>
-						<a href={packages.pathsim.pypi} class="icon-btn" use:tooltip={'PyPI'}>
-							<Icon name="package" size={14} />
-						</a>
-						<a href={packages.pathsim.examples} class="icon-btn" use:tooltip={'Examples'}>
-							<Icon name="play" size={14} />
-						</a>
-						<a href={packages.pathsim.github} class="icon-btn" use:tooltip={'GitHub'}>
-							<Icon name="github" size={14} />
-						</a>
-					</div>
-				</div>
-				<a href={packages.pathsim.docs} class="ecosystem-body">
-					<img src={packages.pathsim.logo} alt={packages.pathsim.name} />
-				</a>
-			</div>
-			<div class="ecosystem-card">
-				<div class="panel-header">
-					<span>{packages.chem.shortName}</span>
-					<div class="header-actions">
-						<a href={packages.chem.api} class="icon-btn" use:tooltip={'API'}>
-							<Icon name="braces" size={14} />
-						</a>
-						<a href={packages.chem.docs} class="icon-btn" use:tooltip={'Docs'}>
-							<Icon name="book" size={14} />
-						</a>
-						<a href={packages.chem.pypi} class="icon-btn" use:tooltip={'PyPI'}>
-							<Icon name="package" size={14} />
-						</a>
-						<a href={packages.chem.examples} class="icon-btn" use:tooltip={'Examples'}>
-							<Icon name="play" size={14} />
-						</a>
-						<a href={packages.chem.github} class="icon-btn" use:tooltip={'GitHub'}>
-							<Icon name="github" size={14} />
-						</a>
-					</div>
-				</div>
-				<a href={packages.chem.docs} class="ecosystem-body">
-					<img src={packages.chem.logo} alt={packages.chem.name} />
-				</a>
-			</div>
-			<div class="ecosystem-card">
-				<div class="panel-header">
-					<span>{packages.vehicle.shortName}</span>
-					<div class="header-actions">
-						<a href={packages.vehicle.api} class="icon-btn" use:tooltip={'API'}>
-							<Icon name="braces" size={14} />
-						</a>
-						<a href={packages.vehicle.docs} class="icon-btn" use:tooltip={'Docs'}>
-							<Icon name="book" size={14} />
-						</a>
-						<a href={packages.vehicle.pypi} class="icon-btn" use:tooltip={'PyPI'}>
-							<Icon name="package" size={14} />
-						</a>
-						<a href={packages.vehicle.examples} class="icon-btn" use:tooltip={'Examples'}>
-							<Icon name="play" size={14} />
-						</a>
-						<a href={packages.vehicle.github} class="icon-btn" use:tooltip={'GitHub'}>
-							<Icon name="github" size={14} />
-						</a>
-					</div>
-				</div>
-				<a href={packages.vehicle.docs} class="ecosystem-body">
-					<img src={packages.vehicle.logo} alt={packages.vehicle.name} />
-				</a>
-			</div>
+			{/each}
 		</div>
 	</section>
 
