@@ -13,10 +13,6 @@
 			<Icon name="github" size={14} />
 			<span>GitHub</span>
 		</a>
-		<a href={footer.pypi} class="footer-link">
-			<Icon name="package" size={14} />
-			<span>PyPI</span>
-		</a>
 		<span class="footer-text">MIT License</span>
 	</div>
 </footer>
