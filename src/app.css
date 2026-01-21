@@ -77,6 +77,7 @@
 	/* ===== LAYOUT ===== */
 	--header-height: 40px;
 	--content-max-width: 1200px;
+	--app-min-width: 320px;
 
 	/* ===== BREAKPOINTS =====
 	 * Note: CSS custom properties cannot be used in @media queries.
@@ -137,6 +138,7 @@ html {
 html,
 body {
 	height: 100%;
+	min-width: var(--app-min-width);
 	font-family: var(--font-ui);
 	font-size: var(--font-base);
 	line-height: 1.6;
