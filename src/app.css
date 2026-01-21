@@ -749,13 +749,17 @@ input::placeholder {
 	outline-offset: 2px;
 }
 
-/* Remove focus outline from CodeMirror (has its own cursor) */
+/* Remove focus outline from CodeMirror and code panels (editor has its own cursor) */
 .cm-editor:focus-visible,
 .cm-editor:focus,
 .cm-editor *:focus-visible,
 .cm-editor *:focus,
 .cm-content:focus-visible,
-.cm-content:focus {
+.cm-content:focus,
+.code-panel:focus-visible,
+.code-panel:focus-within,
+.code-panel *:focus-visible,
+.code-panel *:focus {
 	outline: none !important;
 }
 
