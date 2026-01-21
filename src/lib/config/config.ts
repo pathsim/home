@@ -35,7 +35,7 @@ export const packages: Record<string, PackageConfig> = {
 	pathsim: {
 		name: 'PathSim',
 		shortName: 'pathsim',
-		logo: '/pathsim_logo.png',
+		logo: 'pathsim_logo.png',
 		docs: `${external.docs}/pathsim`,
 		api: `${external.docs}/pathsim/api`,
 		examples: `${external.docs}/pathsim/examples`,
@@ -45,7 +45,7 @@ export const packages: Record<string, PackageConfig> = {
 	chem: {
 		name: 'PathSim-Chem',
 		shortName: 'chem',
-		logo: '/pathsim_chem_logo.png',
+		logo: 'pathsim_chem_logo.png',
 		docs: `${external.docs}/chem`,
 		api: `${external.docs}/chem/api`,
 		pypi: `${external.pypi}/pathsim-chem`,
@@ -54,7 +54,7 @@ export const packages: Record<string, PackageConfig> = {
 	vehicle: {
 		name: 'PathSim-Vehicle',
 		shortName: 'vehicle',
-		logo: '/pathsim_vehicle_logo.png',
+		logo: 'pathsim_vehicle_logo.png',
 		docs: `${external.docs}/vehicle`,
 		api: `${external.docs}/vehicle/api`,
 		github: `${external.github}/pathsim-vehicle`
@@ -62,7 +62,7 @@ export const packages: Record<string, PackageConfig> = {
 	pathview: {
 		name: 'PathView',
 		shortName: 'pathview',
-		logo: '/pathview_logo.png',
+		logo: 'pathview_logo.png',
 		docs: external.view,
 		app: external.view,
 		github: `${external.github}/pathview`
