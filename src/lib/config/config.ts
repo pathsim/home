@@ -23,7 +23,7 @@ export interface PackageConfig {
 	name: string;
 	shortName: string;
 	logo: string;
-	docs: string;
+	docs?: string;
 	api?: string;
 	examples?: string;
 	pypi?: string;
@@ -63,7 +63,6 @@ export const packages: Record<string, PackageConfig> = {
 		name: 'PathView',
 		shortName: 'pathview',
 		logo: 'pathview_logo.png',
-		docs: external.view,
 		app: external.view,
 		github: `${external.github}/pathview`
 	}

@@ -176,9 +176,11 @@
 									<Icon name="braces" size={14} />
 								</a>
 							{/if}
-							<a href={pkg.docs} class="icon-btn" use:tooltip={'Docs'}>
-								<Icon name="book" size={14} />
-							</a>
+							{#if pkg.docs}
+								<a href={pkg.docs} class="icon-btn" use:tooltip={'Docs'}>
+									<Icon name="book" size={14} />
+								</a>
+							{/if}
 							{#if pkg.pypi}
 								<a href={pkg.pypi} class="icon-btn" use:tooltip={'PyPI'}>
 									<Icon name="package" size={14} />
