@@ -99,7 +99,7 @@
 			</div>
 		</div>
 		<div class="hero-visual">
-			<div class="code-panel">
+			<div class="code-panel elevated">
 				<div class="panel-header code-panel-header">
 					<span>Example</span>
 					<button
@@ -125,7 +125,7 @@
 	<section class="installation">
 		<h2>Installation</h2>
 		<div class="install-grid">
-			<button class="install-card" onclick={() => handleCopy('pip install pathsim', 'pip')}>
+			<button class="install-card elevated" onclick={() => handleCopy('pip install pathsim', 'pip')}>
 				<div class="panel-header">
 					<span>pip</span>
 					<div class="header-actions">
@@ -138,7 +138,7 @@
 					<code>pip install pathsim</code>
 				</div>
 			</button>
-			<button class="install-card" onclick={() => handleCopy('conda install -c conda-forge pathsim', 'conda')}>
+			<button class="install-card elevated" onclick={() => handleCopy('conda install -c conda-forge pathsim', 'conda')}>
 				<div class="panel-header">
 					<span>conda</span>
 					<div class="header-actions">
@@ -162,7 +162,7 @@
 		<div class="ecosystem-grid">
 			{#each packageOrder as pkgId}
 				{@const pkg = packages[pkgId]}
-				<div class="ecosystem-card">
+				<div class="ecosystem-card elevated">
 					<div class="panel-header">
 						<span>{pkg.shortName}</span>
 						<div class="header-actions">
@@ -211,7 +211,7 @@
 		<h2>Features</h2>
 		<div class="feature-grid">
 			{#each features as feature}
-				<div class="feature-card">
+				<div class="feature-card elevated">
 					<div class="panel-header">{feature.title}</div>
 					<div class="panel-body feature-body">{feature.description}</div>
 				</div>
