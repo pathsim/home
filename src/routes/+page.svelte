@@ -185,7 +185,7 @@
 							{/if}
 							{#if pkg.examples}
 								<a href={pkg.examples} class="icon-btn" use:tooltip={'Examples'}>
-									<Icon name="file-text" size={14} />
+									<Icon name="code" size={14} />
 								</a>
 							{/if}
 							<a href={pkg.github} class="icon-btn" use:tooltip={'GitHub'}>
