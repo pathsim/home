@@ -2,20 +2,7 @@
  * Shared CodeMirror utilities for consistent editor setup across the app.
  */
 
-// Syntax highlighting colors - aligned with node color palette
-export const SYNTAX_COLORS = {
-	keyword: '#E57373',   // Red - control flow, imports
-	operator: '#0070C0', // PathSim blue - symbols, operators
-	special: '#FFB74D',  // Orange - classes, types, decorators
-	number: '#4DB6AC',   // Teal - numeric literals
-	string: '#81C784',   // Green - string literals
-	function: '#0070C0', // PathSim blue - function names
-	comment: { dark: '#505060', light: '#909098' },  // Same as line numbers
-	invalid: '#BA68C8',  // Purple - errors
-	// Theme-specific values for variables and punctuation
-	variable: { dark: '#e0e0e0', light: '#383a42' },
-	punctuation: { dark: '#abb2bf', light: '#505050' }
-} as const;
+import { SYNTAX_COLORS } from './colors';
 
 // Cached CodeMirror modules
 let cachedModules: CodeMirrorModules | null = null;
@@ -162,4 +149,60 @@ export function createEditorExtensions(
 	}
 
 	return extensions;
+}
+
+/**
+ * Editor lifecycle manager - handles creation, theme updates, and cleanup
+ * Reduces boilerplate in components that use CodeMirror
+ */
+export class EditorManager {
+	private view: import('@codemirror/view').EditorView | null = null;
+	private modules: CodeMirrorModules | null = null;
+	private options: EditorOptions;
+
+	constructor(options: EditorOptions = {}) {
+		this.options = options;
+	}
+
+	/** Initialize the editor with the given content and container */
+	async init(content: string, container: HTMLElement, isDark: boolean): Promise<void> {
+		this.modules = await loadCodeMirrorModules();
+		this.view = new this.modules.EditorView({
+			doc: content,
+			extensions: createEditorExtensions(this.modules, isDark, this.options),
+			parent: container
+		});
+	}
+
+	/** Update the editor theme (recreates editor with new extensions) */
+	updateTheme(content: string, container: HTMLElement, isDark: boolean): void {
+		if (!this.modules) return;
+		this.view?.destroy();
+		this.view = new this.modules.EditorView({
+			doc: content,
+			extensions: createEditorExtensions(this.modules, isDark, this.options),
+			parent: container
+		});
+	}
+
+	/** Get the current document content */
+	getContent(): string {
+		return this.view?.state.doc.toString() ?? '';
+	}
+
+	/** Destroy the editor */
+	destroy(): void {
+		this.view?.destroy();
+		this.view = null;
+	}
+
+	/** Check if editor is initialized */
+	get isInitialized(): boolean {
+		return this.view !== null;
+	}
+
+	/** Get the underlying EditorView (for advanced use) */
+	get editorView(): import('@codemirror/view').EditorView | null {
+		return this.view;
+	}
 }

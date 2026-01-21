@@ -4,6 +4,8 @@
 	import Tooltip, { tooltip } from '$lib/components/Tooltip.svelte';
 	import { loadCodeMirrorModules, createEditorExtensions, type CodeMirrorModules } from '$lib/utils/codemirror';
 	import { packages, nav, footer } from '$lib/config/links';
+	import { copyToClipboard } from '$lib/utils/clipboard';
+	import { hero, installation, features, exampleCode } from '$lib/config/content';
 
 	let copiedPip = $state(false);
 	let copiedConda = $state(false);
@@ -14,37 +16,13 @@
 	let cmModules: CodeMirrorModules | null = null;
 	let editorLoading = $state(true);
 
-	const exampleCode = `from pathsim import Simulation, Connection
-from pathsim.blocks import Integrator, Amplifier, Scope
-
-# blocks
-integ = Integrator(1.0)
-amp = Amplifier(-0.5)
-scope = Scope()
-
-# connections (feedback loop)
-connections = [
-    Connection(integ, amp, scope),
-    Connection(amp, integ)
-]
-
-# simulate
-sim = Simulation([integ, amp, scope], connections)
-sim.run(10.0)
-scope.plot()`;
-
-	function copyToClipboard(text: string, type: 'pip' | 'conda' | 'code') {
-		navigator.clipboard.writeText(text);
-		if (type === 'pip') {
-			copiedPip = true;
-			setTimeout(() => (copiedPip = false), 2000);
-		} else if (type === 'conda') {
-			copiedConda = true;
-			setTimeout(() => (copiedConda = false), 2000);
-		} else {
-			copiedCode = true;
-			setTimeout(() => (copiedCode = false), 2000);
-		}
+	function handleCopy(text: string, type: 'pip' | 'conda' | 'code') {
+		const setters = {
+			pip: { on: () => (copiedPip = true), off: () => (copiedPip = false) },
+			conda: { on: () => (copiedConda = true), off: () => (copiedConda = false) },
+			code: { on: () => (copiedCode = true), off: () => (copiedCode = false) }
+		};
+		copyToClipboard(text, setters[type].on, setters[type].off);
 	}
 
 	onMount(async () => {
@@ -86,7 +64,7 @@ scope.plot()`;
 
 <svelte:head>
 	<title>PathSim - Python Framework for Simulating Dynamical Systems</title>
-	<meta name="description" content="PathSim is a Python framework for simulating dynamical systems using block diagrams. Build, simulate, and analyze continuous-time, discrete-time, and hybrid systems." />
+	<meta name="description" content={hero.metaDescription} />
 </svelte:head>
 
 <Tooltip />
@@ -96,11 +74,8 @@ scope.plot()`;
 	<section class="hero">
 		<div class="hero-content">
 			<img src="/pathsim_logo.png" alt="PathSim" class="hero-logo" />
-			<p class="tagline">Python native System modeling</p>
-			<p class="description">
-				Build, simulate, and analyze continuous-time, discrete-time, and hybrid systems
-				using intuitive block diagrams. From simple ODEs to complex multi-domain simulations.
-			</p>
+			<p class="tagline">{hero.tagline}</p>
+			<p class="description">{hero.description}</p>
 			<div class="hero-actions">
 				<a href={nav.getStarted} class="action-card">
 					<Icon name="zap" size={20} />
@@ -130,7 +105,7 @@ scope.plot()`;
 					<span>Example</span>
 					<button
 						class="icon-btn"
-						onclick={() => copyToClipboard(exampleCode, 'code')}
+						onclick={() => handleCopy(exampleCode, 'code')}
 						use:tooltip={copiedCode ? 'Copied!' : 'Copy'}
 					>
 						<Icon name={copiedCode ? 'check' : 'copy'} size={14} />
@@ -151,7 +126,7 @@ scope.plot()`;
 	<section class="installation">
 		<h2>Installation</h2>
 		<div class="install-grid">
-			<button class="install-card" onclick={() => copyToClipboard('pip install pathsim', 'pip')}>
+			<button class="install-card" onclick={() => handleCopy('pip install pathsim', 'pip')}>
 				<div class="panel-header">
 					<span>pip</span>
 					<div class="header-actions">
@@ -164,7 +139,7 @@ scope.plot()`;
 					<code>pip install pathsim</code>
 				</div>
 			</button>
-			<button class="install-card" onclick={() => copyToClipboard('conda install -c conda-forge pathsim', 'conda')}>
+			<button class="install-card" onclick={() => handleCopy('conda install -c conda-forge pathsim', 'conda')}>
 				<div class="panel-header">
 					<span>conda</span>
 					<div class="header-actions">
@@ -286,38 +261,12 @@ scope.plot()`;
 	<section class="features">
 		<h2>Features</h2>
 		<div class="feature-grid">
-			<div class="feature-card">
-				<div class="panel-header">Hot-Swappable</div>
-				<div class="panel-body feature-body">Switch blocks and solvers during active simulation at runtime.</div>
-			</div>
-			<div class="feature-card">
-				<div class="panel-header">MIMO Capable</div>
-				<div class="panel-body feature-body">Multiple input, multiple output ports built into all blocks.</div>
-			</div>
-			<div class="feature-card">
-				<div class="panel-header">18+ Solvers</div>
-				<div class="panel-body feature-body">Implicit, explicit, and adaptive integrators for stiff and non-stiff systems.</div>
-			</div>
-			<div class="feature-card">
-				<div class="panel-header">Hierarchical</div>
-				<div class="panel-body feature-body">Nested subsystems for modular, reusable component design.</div>
-			</div>
-			<div class="feature-card">
-				<div class="panel-header">Event Handling</div>
-				<div class="panel-body feature-body">Zero-crossing detection and scheduled events for hybrid systems.</div>
-			</div>
-			<div class="feature-card">
-				<div class="panel-header">Extensible</div>
-				<div class="panel-body feature-body">Create custom blocks by subclassing the base Block class.</div>
-			</div>
-			<div class="feature-card">
-				<div class="panel-header">Browser Editor</div>
-				<div class="panel-body feature-body">Design and simulate visually with PathView using Pyodide.</div>
-			</div>
-			<div class="feature-card">
-				<div class="panel-header">Domain Toolboxes</div>
-				<div class="panel-body feature-body">Specialized blocks for chemical engineering and vehicle dynamics.</div>
-			</div>
+			{#each features as feature}
+				<div class="feature-card">
+					<div class="panel-header">{feature.title}</div>
+					<div class="panel-body feature-body">{feature.description}</div>
+				</div>
+			{/each}
 		</div>
 	</section>
 

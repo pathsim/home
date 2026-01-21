@@ -72,6 +72,38 @@
 	--font-3xl: 32px;
 	--font-4xl: 48px;
 	--font-5xl: 64px;
+
+	/* ===== ICON SIZES ===== */
+	--icon-xs: 12px;
+	--icon-sm: 14px;
+	--icon-md: 16px;
+	--icon-lg: 20px;
+	--icon-xl: 24px;
+
+	/* ===== LAYOUT ===== */
+	--header-height: 40px;
+	--content-max-width: 1200px;
+
+	/* ===== BREAKPOINTS =====
+	 * Note: CSS custom properties cannot be used in @media queries.
+	 * These values serve as documentation for consistent breakpoint usage:
+	 * - 600px: Mobile - single column layouts, simplified UI
+	 * - 768px: Tablet - sidebar collapses, responsive navigation
+	 * - 900px: Desktop - multi-column grids, full layout
+	 */
+	--bp-mobile: 600px;
+	--bp-tablet: 768px;
+	--bp-desktop: 900px;
+
+	/* ===== Z-INDEX ===== */
+	--z-dropdown: 100;
+	--z-sticky: 200;
+	--z-modal: 1000;
+	--z-tooltip: 1100;
+
+	/* ===== TIMING ===== */
+	--duration-toast: 2000ms;
+	--duration-copy-feedback: 2000ms;
 }
 
 /* Light Theme */
@@ -461,4 +493,62 @@ button.ghost:hover {
 
 [data-theme="light"] .cm-focused .cm-selectionBackground {
 	background: var(--accent-bg) !important;
+}
+
+/* ============================================
+   LOADING INDICATOR
+   Centered loading state for async content
+   ============================================ */
+
+.loading-centered {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 200px;
+	color: var(--text-muted);
+	font-size: var(--font-sm);
+	background: var(--surface);
+}
+
+/* ============================================
+   FLEX UTILITIES
+   Common flexbox patterns
+   ============================================ */
+
+.flex-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.flex-between {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.flex-col {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex-1 {
+	flex: 1;
+	min-width: 0;
+}
+
+.gap-xs {
+	gap: var(--space-xs);
+}
+
+.gap-sm {
+	gap: var(--space-sm);
+}
+
+.gap-md {
+	gap: var(--space-md);
+}
+
+.gap-lg {
+	gap: var(--space-lg);
 }
