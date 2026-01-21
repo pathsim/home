@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
+	import { base } from '$app/paths';
 	import Icon from '$lib/components/common/Icon.svelte';
 	import { tooltip } from '$lib/components/common/Tooltip.svelte';
 	import { loadCodeMirrorModules, createEditorExtensions, type CodeMirrorModules } from '$lib/utils/codemirror';
@@ -71,7 +72,7 @@
 	<!-- Hero Section -->
 	<section class="hero">
 		<div class="hero-content">
-			<img src="/pathsim_logo.png" alt="PathSim" class="hero-logo" />
+			<img src="{base}/pathsim_logo.png" alt="PathSim" class="hero-logo" />
 			<p class="tagline">{hero.tagline}</p>
 			<p class="description">{hero.description}</p>
 			<div class="hero-actions">
@@ -194,7 +195,7 @@
 						</div>
 					</div>
 					<a href={pkg.app || pkg.docs} class="ecosystem-body">
-						<img src={pkg.logo} alt={pkg.name} />
+						<img src="{base}/{pkg.logo}" alt={pkg.name} />
 					</a>
 				</div>
 			{/each}

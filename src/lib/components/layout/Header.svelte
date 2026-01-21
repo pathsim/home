@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import Icon from '$lib/components/common/Icon.svelte';
 	import { tooltip } from '$lib/components/common/Tooltip.svelte';
 	import { nav } from '$lib/config/config';
@@ -13,8 +14,8 @@
 
 <header>
 	<div class="header-content">
-		<a href="/" class="logo" use:tooltip={'Home'}>
-			<img src="/favicon.png" alt="PathSim" />
+		<a href="{base}/" class="logo" use:tooltip={'Home'}>
+			<img src="{base}/favicon.png" alt="PathSim" />
 		</a>
 		<nav class="header-actions">
 			<a href={nav.docs} class="icon-btn" use:tooltip={'Documentation'}>
