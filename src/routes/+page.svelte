@@ -312,6 +312,7 @@
 	.code-panel-body {
 		min-height: 200px;
 		padding: 0;
+		outline: none !important;
 	}
 
 	.code-panel-body .loading {
