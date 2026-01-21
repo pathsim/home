@@ -110,7 +110,7 @@
 						<Icon name={copiedCode ? 'check' : 'copy'} size={14} />
 					</button>
 				</div>
-				<div class="panel-body code-panel-body" bind:this={editorContainer} tabindex="-1">
+				<div class="panel-body code-panel-body" bind:this={editorContainer} tabindex="-1" style="outline: none !important;">
 					{#if editorLoading}
 						<div class="loading">Loading...</div>
 					{/if}
