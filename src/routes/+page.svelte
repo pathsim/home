@@ -277,7 +277,7 @@
 
 	.description {
 		font-size: var(--font-base);
-		color: var(--text);
+		color: var(--text-muted);
 		margin-bottom: var(--space-xl);
 		max-width: 450px;
 	}
