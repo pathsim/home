@@ -1,9 +1,8 @@
 <script lang="ts">
 	import '../app.css';
 	import { onMount } from 'svelte';
-	import Icon from '$lib/components/Icon.svelte';
-	import Tooltip, { tooltip } from '$lib/components/Tooltip.svelte';
-	import { external, nav } from '$lib/config/links';
+	import Tooltip from '$lib/components/common/Tooltip.svelte';
+	import Header from '$lib/components/layout/Header.svelte';
 
 	let { children } = $props();
 
@@ -26,68 +25,24 @@
 	}
 </script>
 
+<a href="#main-content" class="skip-link">Skip to main content</a>
 <Tooltip />
 
 <div class="app">
-	<header>
-		<div class="header-content">
-			<a href="/" class="logo" use:tooltip={'Home'}>
-				<img src="/favicon.png" alt="PathSim" />
-			</a>
-			<nav class="header-actions">
-				<a href={nav.docs} class="icon-btn" use:tooltip={'Documentation'}>
-					<Icon name="book" size={14} />
-				</a>
-				<a href={nav.tryOnline} class="icon-btn" use:tooltip={'Editor'}>
-					<Icon name="play" size={14} />
-				</a>
-				<a href={nav.github} class="icon-btn" use:tooltip={'GitHub'}>
-					<Icon name="github" size={14} />
-				</a>
-				<button class="icon-btn" onclick={toggleTheme} use:tooltip={'Toggle theme'}>
-					<Icon name={theme === 'dark' ? 'sun' : 'moon'} size={14} />
-				</button>
-			</nav>
-		</div>
-	</header>
-	{@render children()}
+	<Header onThemeToggle={toggleTheme} {theme} />
+	<main id="main-content">
+		{@render children()}
+	</main>
 </div>
 
 <style>
 	.app {
 		min-height: 100vh;
-	}
-
-	header {
-		position: sticky;
-		top: 0;
-		z-index: 100;
-		background: var(--surface-raised);
-		border-bottom: 1px solid var(--border);
-	}
-
-	.header-content {
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: var(--space-sm) var(--space-lg);
 		display: flex;
-		align-items: center;
-		justify-content: space-between;
+		flex-direction: column;
 	}
 
-	.logo {
-		display: flex;
-		align-items: center;
-	}
-
-	.logo img {
-		height: 24px;
-		width: auto;
-	}
-
-	nav {
-		display: flex;
-		align-items: center;
-		gap: var(--space-xs);
+	main {
+		flex: 1;
 	}
 </style>

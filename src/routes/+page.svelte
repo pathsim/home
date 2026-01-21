@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import Icon from '$lib/components/Icon.svelte';
-	import Tooltip, { tooltip } from '$lib/components/Tooltip.svelte';
+	import Icon from '$lib/components/common/Icon.svelte';
+	import { tooltip } from '$lib/components/common/Tooltip.svelte';
 	import { loadCodeMirrorModules, createEditorExtensions, type CodeMirrorModules } from '$lib/utils/codemirror';
-	import { packages, nav, footer } from '$lib/config/links';
+	import { packages, nav, footer, hero, installation, features, exampleCode } from '$lib/config/config';
 	import { copyToClipboard } from '$lib/utils/clipboard';
-	import { hero, installation, features, exampleCode } from '$lib/config/content';
 
 	let copiedPip = $state(false);
 	let copiedConda = $state(false);
@@ -66,8 +65,6 @@
 	<title>PathSim - Python Framework for Simulating Dynamical Systems</title>
 	<meta name="description" content={hero.metaDescription} />
 </svelte:head>
-
-<Tooltip />
 
 <main>
 	<!-- Hero Section -->
