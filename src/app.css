@@ -62,16 +62,10 @@
 	--radius-xl: 20px;
 
 	/* ===== FONT SIZES ===== */
-	--font-xs: 11px;
-	--font-sm: 12px;
-	--font-base: 14px;
-	--font-md: 16px;
-	--font-lg: 18px;
-	--font-xl: 20px;
-	--font-2xl: 24px;
-	--font-3xl: 32px;
-	--font-4xl: 48px;
-	--font-5xl: 64px;
+	/* Three-tier system: 12px (body) → 14px (headers) → 16px (titles) */
+	--font-base: 12px;  /* Body text, code, buttons, most UI */
+	--font-md: 14px;    /* Section headers, panel headers, labels */
+	--font-lg: 16px;    /* Page titles (h1) only */
 
 	/* ===== ICON SIZES ===== */
 	--icon-xs: 12px;
@@ -185,7 +179,7 @@ code {
 
 pre {
 	font-family: var(--font-mono);
-	font-size: var(--font-sm);
+	font-size: var(--font-base);
 	background: var(--surface-raised);
 	padding: var(--space-lg);
 	border-radius: var(--radius-md);
@@ -313,7 +307,7 @@ button.ghost:hover {
 }
 
 .action-card .action-label {
-	font-size: 11px;
+	font-size: var(--font-base);
 	font-weight: 500;
 }
 
@@ -325,7 +319,7 @@ button.ghost:hover {
 	padding: var(--space-sm) var(--space-lg);
 	background: var(--surface-raised);
 	border-bottom: 1px solid var(--border);
-	font-size: 11px;
+	font-size: var(--font-base);
 	font-weight: 600;
 	color: var(--text-muted);
 	text-transform: uppercase;
@@ -418,7 +412,7 @@ button.ghost:hover {
 /* CodeMirror editor styling */
 .cm-editor {
 	height: 100%;
-	font-size: 12px;
+	font-size: var(--font-base);
 	background: var(--surface);
 }
 
@@ -506,7 +500,7 @@ button.ghost:hover {
 	justify-content: center;
 	height: 200px;
 	color: var(--text-muted);
-	font-size: var(--font-sm);
+	font-size: var(--font-base);
 	background: var(--surface);
 }
 
