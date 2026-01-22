@@ -282,6 +282,7 @@
 	.hero-actions {
 		display: grid;
 		grid-template-columns: repeat(5, auto);
+		justify-items: center;
 		gap: var(--space-xs);
 	}
 
