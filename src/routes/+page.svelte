@@ -281,6 +281,7 @@
 
 	.hero-actions {
 		display: flex;
+		flex-wrap: wrap;
 		gap: var(--space-xs);
 	}
 
@@ -453,5 +454,19 @@
 		height: 100px;
 		width: auto;
 		object-fit: contain;
+	}
+
+	@media (max-width: 600px) {
+		main {
+			padding: 0 var(--space-md);
+		}
+
+		.hero {
+			padding: var(--space-xl) 0;
+		}
+
+		.hero-logo {
+			height: 100px;
+		}
 	}
 </style>

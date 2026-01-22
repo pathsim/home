@@ -79,7 +79,7 @@
 	/* ===== LAYOUT ===== */
 	--header-height: 40px;
 	--content-max-width: 1200px;
-	--app-min-width: 320px;
+	--app-min-width: 280px;
 
 	/* ===== BREAKPOINTS =====
 	 * Note: CSS custom properties cannot be used in @media queries.
@@ -822,7 +822,18 @@ input::placeholder {
 .hero-actions {
 	display: flex;
 	justify-content: center;
+	flex-wrap: wrap;
 	gap: var(--space-xs);
+}
+
+@media (max-width: 600px) {
+	.hero {
+		padding: var(--space-xl) 0;
+	}
+
+	.hero-logo {
+		height: 100px;
+	}
 }
 
 /* Lead paragraph - prominent intro text */
