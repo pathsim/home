@@ -463,10 +463,37 @@
 
 		.hero {
 			padding: var(--space-xl) 0;
+			gap: var(--space-xl);
+		}
+
+		.hero-content,
+		.hero-visual {
+			min-width: 0;
+			width: 100%;
 		}
 
 		.hero-logo {
 			height: 100px;
+		}
+
+		.description {
+			max-width: 100%;
+		}
+
+		.hero-actions {
+			justify-content: flex-start;
+		}
+
+		.hero-actions :global(.action-card) {
+			padding: 4px 8px;
+		}
+
+		.code-panel-body {
+			min-height: 150px;
+		}
+
+		.code-panel-body :global(.cm-editor) {
+			max-height: 250px;
 		}
 	}
 </style>
