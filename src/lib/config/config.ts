@@ -83,12 +83,6 @@ export const nav = {
 	sponsor: external.sponsor
 };
 
-export const footer = {
-	docs: external.docs,
-	github: `${external.github}/pathsim`,
-	pypi: `${external.pypi}/pathsim`
-};
-
 // ============================================
 // HERO CONTENT
 // ============================================

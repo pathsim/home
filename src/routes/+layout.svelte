@@ -3,7 +3,6 @@
 	import { onMount } from 'svelte';
 	import Tooltip from '$lib/components/common/Tooltip.svelte';
 	import Header from '$lib/components/layout/Header.svelte';
-	import Footer from '$lib/components/layout/Footer.svelte';
 
 	let { children } = $props();
 
@@ -34,7 +33,6 @@
 	<main id="main-content">
 		{@render children()}
 	</main>
-	<Footer />
 </div>
 
 <style>
