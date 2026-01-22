@@ -255,9 +255,6 @@
 		.hero {
 			grid-template-columns: 1fr;
 		}
-		.hero-visual {
-			display: none;
-		}
 	}
 
 	.hero-logo {
