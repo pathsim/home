@@ -63,6 +63,8 @@
 
 	/* ===== FONT SIZES ===== */
 	/* Three-tier system: 12px (body) → 14px (headers) → 16px (titles) */
+	--font-xs: 10px;    /* Fine print, badges */
+	--font-sm: 11px;    /* Secondary text, captions */
 	--font-base: 12px;  /* Body text, code, buttons, most UI */
 	--font-md: 14px;    /* Section headers, panel headers, labels */
 	--font-lg: 16px;    /* Page titles (h1) only */

@@ -30,6 +30,6 @@ export const theme = readable<Theme>(getTheme(), (set) => {
 	return () => observer.disconnect();
 });
 
-export const isDark = readable<boolean>(true, (set) => {
+export const isDark = readable<boolean>(getTheme() === 'dark', (set) => {
 	return theme.subscribe((t) => set(t === 'dark'));
 });

@@ -27,17 +27,3 @@ export async function copyToClipboard(
 		return false;
 	}
 }
-
-/**
- * Simple copy without state management
- * @param text - Text to copy
- * @returns Promise resolving to success boolean
- */
-export async function copy(text: string): Promise<boolean> {
-	try {
-		await navigator.clipboard.writeText(text);
-		return true;
-	} catch {
-		return false;
-	}
-}
