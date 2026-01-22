@@ -64,7 +64,7 @@
 </script>
 
 <svelte:head>
-	<title>PathSim - Python Framework for Simulating Dynamical Systems</title>
+	<title>PathSim</title>
 	<meta name="description" content={hero.metaDescription} />
 </svelte:head>
 
