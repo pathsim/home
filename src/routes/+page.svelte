@@ -280,9 +280,15 @@
 	}
 
 	.hero-actions {
-		display: flex;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: repeat(5, auto);
 		gap: var(--space-xs);
+	}
+
+	@media (max-width: 900px) {
+		.hero-actions {
+			grid-template-columns: repeat(5, 1fr);
+		}
 	}
 
 
@@ -469,7 +475,7 @@
 		.hero-content,
 		.hero-visual {
 			min-width: 0;
-			width: 100%;
+			max-width: 100%;
 		}
 
 		.hero-logo {
@@ -481,19 +487,12 @@
 		}
 
 		.hero-actions {
-			justify-content: flex-start;
+			grid-template-columns: repeat(3, 1fr);
 		}
 
-		.hero-actions :global(.action-card) {
-			padding: 4px 8px;
-		}
-
-		.code-panel-body {
-			min-height: 150px;
-		}
-
-		.code-panel-body :global(.cm-editor) {
-			max-height: 250px;
+		.code-panel {
+			max-width: 100%;
+			overflow: hidden;
 		}
 	}
 </style>
