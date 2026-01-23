@@ -72,7 +72,7 @@ static/
 
 - PathSim logo and tagline
 - Brief description
-- Action buttons: Get Started, Docs, Editor, GitHub, Sponsor
+- Action buttons: Intro, Docs, Editor, GitHub, Sponsor
 - Interactive code example (read-only CodeMirror)
 
 ### Installation

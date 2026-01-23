@@ -78,7 +78,7 @@
 			<div class="hero-actions">
 				<a href={nav.getStarted} class="action-card">
 					<Icon name="zap" size={20} />
-					<span class="action-label">Get Started</span>
+					<span class="action-label">Intro</span>
 				</a>
 				<a href={nav.docs} class="action-card">
 					<Icon name="book" size={20} />
