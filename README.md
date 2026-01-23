@@ -379,9 +379,3 @@ Key shared elements:
 4. **Dark-first design** - Default dark theme, light as override
 5. **Responsive by default** - Mobile-friendly from the start
 6. **Static generation** - No server required, fast CDN delivery
-
----
-
-## License
-
-MIT
