@@ -72,7 +72,7 @@ static/
 
 - PathSim logo and tagline
 - Brief description
-- Action buttons: Get Started, Docs, Try Online, GitHub, Sponsor
+- Action buttons: Get Started, Docs, Editor, GitHub, Sponsor
 - Interactive code example (read-only CodeMirror)
 
 ### Installation
@@ -90,7 +90,7 @@ Grid of 4 package cards:
 
 | Package | Description |
 |---------|-------------|
-| **PathView** | Visual node editor (Try Online) |
+| **PathView** | Visual node editor (Editor) |
 | **PathSim** | Core simulation framework |
 | **PathSim-Chem** | Chemical reaction networks |
 | **PathSim-Vehicle** | Vehicle dynamics |
