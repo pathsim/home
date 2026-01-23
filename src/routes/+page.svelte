@@ -281,15 +281,9 @@
 
 	.hero-actions {
 		display: grid;
-		grid-template-columns: repeat(5, auto);
+		grid-template-columns: repeat(5, 1fr);
 		justify-items: center;
 		gap: var(--space-xs);
-	}
-
-	@media (max-width: 900px) {
-		.hero-actions {
-			grid-template-columns: repeat(5, 1fr);
-		}
 	}
 
 
