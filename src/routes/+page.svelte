@@ -84,7 +84,7 @@
 					<Icon name="book" size={20} />
 					<span class="action-label">Docs</span>
 				</a>
-				<a href={nav.tryOnline} class="action-card">
+				<a href={nav.editor} class="action-card">
 					<Icon name="play" size={20} />
 					<span class="action-label">Editor</span>
 				</a>

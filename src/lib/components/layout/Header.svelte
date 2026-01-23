@@ -20,7 +20,7 @@
 			<a href="/" class="icon-btn" use:tooltip={'Home'}>
 				<Icon name="home" size={14} />
 			</a>
-			<a href={nav.tryOnline} class="icon-btn" use:tooltip={'Editor'}>
+			<a href={nav.editor} class="icon-btn" use:tooltip={'Editor'}>
 				<Icon name="play" size={14} />
 			</a>
 			<a href={nav.github} class="icon-btn" use:tooltip={'GitHub'}>
