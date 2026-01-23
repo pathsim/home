@@ -79,7 +79,7 @@ export const nav = {
 	getStarted: `${external.docs}/pathsim/getting-started`,
 	docs: external.docs,
 	editor: external.view,
-	github: `${external.github}/pathsim`,
+	github: external.github,
 	sponsor: external.sponsor
 };
 
