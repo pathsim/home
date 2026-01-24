@@ -76,7 +76,7 @@ export const packageOrder = ['pathview', 'pathsim', 'chem', 'vehicle'] as const;
 // ============================================
 
 export const nav = {
-	getStarted: `${external.docs}/pathsim/getting-started`,
+	getStarted: `${external.docs}/pathsim`,
 	docs: external.docs,
 	editor: external.view,
 	github: external.github,
