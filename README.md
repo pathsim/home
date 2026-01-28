@@ -179,7 +179,7 @@ Global styles in `app.css` (1000+ lines) with CSS custom properties.
 | `--surface` | #08080c | #f0f0f4 | Page background |
 | `--surface-raised` | #1c1c26 | #ffffff | Cards, panels |
 | `--text` | #f0f0f5 | #1a1a1f | Primary text |
-| `--text-muted` | #808090 | #606068 | Secondary text |
+| `--text-muted` | #808090 | #808090 | Secondary text (fixed) |
 | `--accent` | #0070c0 | #0070c0 | Brand blue |
 | `--border` | #2a2a36 | #d4d4dc | Borders |
 
