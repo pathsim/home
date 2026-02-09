@@ -14,19 +14,24 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const SCREENSHOTS_DIR = join(__dirname, '..', 'static', 'screenshots');
 
+const defaultViewports = [
+	{ suffix: '', width: 800, height: 500, label: 'desktop' },
+	{ suffix: '-mobile', width: 280, height: 600, label: 'mobile' }
+];
+
+const pathviewViewports = [
+	{ suffix: '', width: 1440, height: 900, label: 'desktop' },
+	{ suffix: '-mobile', width: 390, height: 844, label: 'mobile' }
+];
+
 const sites = [
-	{ id: 'pathview', url: 'https://view.pathsim.org' },
+	{ id: 'pathview', url: 'https://view.pathsim.org', viewports: pathviewViewports },
 	{ id: 'pathsim', url: 'https://docs.pathsim.org/pathsim' },
 	{ id: 'chem', url: 'https://docs.pathsim.org/chem' },
 	{ id: 'vehicle', url: 'https://docs.pathsim.org/vehicle' }
 ];
 
 const themes = ['dark', 'light'];
-
-const viewports = [
-	{ suffix: '', width: 800, height: 500, label: 'desktop' },
-	{ suffix: '-mobile', width: 280, height: 600, label: 'mobile' }
-];
 
 async function captureScreenshot(browser, site, theme, viewport) {
 	const url = `${site.url}${site.url.includes('?') ? '&' : '?'}theme=${theme}`;
@@ -65,6 +70,7 @@ async function main() {
 	try {
 		for (const site of sites) {
 			console.log(`\nCapturing ${site.id} (${site.url}):`);
+			const viewports = site.viewports || defaultViewports;
 			for (const theme of themes) {
 				for (const viewport of viewports) {
 					await captureScreenshot(browser, site, theme, viewport);
