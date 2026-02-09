@@ -1035,9 +1035,3 @@ input::placeholder {
 	font-size: var(--font-base);
 	max-height: 300px;
 }
-
-/* View Transitions API - portal screenshot expansion */
-::view-transition-group(*) {
-	animation-duration: 350ms;
-	animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-}
