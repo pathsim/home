@@ -24,8 +24,8 @@ const sites = [
 const themes = ['dark', 'light'];
 
 const viewports = [
-	{ suffix: '', width: 1440, height: 900, label: 'desktop' },
-	{ suffix: '-mobile', width: 390, height: 844, label: 'mobile' }
+	{ suffix: '', width: 1024, height: 640, label: 'desktop' },
+	{ suffix: '-mobile', width: 320, height: 692, label: 'mobile' }
 ];
 
 async function captureScreenshot(browser, site, theme, viewport) {
