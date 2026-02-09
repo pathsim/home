@@ -62,6 +62,7 @@
 		width: 100%;
 		padding: 0;
 		border: none;
+		border-radius: 0;
 		background: var(--surface);
 		cursor: pointer;
 		overflow: hidden;
