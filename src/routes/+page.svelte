@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, onDestroy, getContext } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { base } from '$app/paths';
 	import Icon from '$lib/components/common/Icon.svelte';
 	import PortalScreenshot from '$lib/components/common/PortalScreenshot.svelte';
@@ -7,9 +7,7 @@
 	import { loadCodeMirrorModules, createEditorExtensions, type CodeMirrorModules } from '$lib/utils/codemirror';
 	import { packages, packageOrder, nav, hero, installation, features, exampleCode } from '$lib/config/config';
 	import { copyToClipboard } from '$lib/utils/clipboard';
-
-	const getTheme = getContext<() => 'dark' | 'light'>('theme');
-	const theme = $derived(getTheme());
+	import { theme } from '$lib/stores/themeStore';
 
 	let copiedPip = $state(false);
 	let copiedConda = $state(false);
@@ -36,7 +34,7 @@
 
 		editorView = new cmModules.EditorView({
 			doc: exampleCode,
-			extensions: createEditorExtensions(cmModules, theme === 'dark', { readOnly: true }),
+			extensions: createEditorExtensions(cmModules, $theme === 'dark', { readOnly: true }),
 			parent: editorContainer
 		});
 
@@ -45,7 +43,7 @@
 
 	// Rebuild editor when theme changes
 	$effect(() => {
-		const isDark = theme === 'dark';
+		const isDark = $theme === 'dark';
 		if (editorView && cmModules && editorContainer) {
 			const currentCode = editorView.state.doc.toString();
 			editorView.destroy();
@@ -199,10 +197,10 @@
 						<PortalScreenshot
 							id={pkgId}
 							screenshot={pkg.screenshot}
-							{theme}
+							theme={$theme}
 							onnavigate={() => {
 								const url = pkg.app || pkg.docs;
-								if (url) window.location.href = url + (url.includes('?') ? '&' : '?') + 'theme=' + theme;
+								if (url) window.location.href = url + (url.includes('?') ? '&' : '?') + 'theme=' + $theme;
 							}}
 						/>
 					{:else}
