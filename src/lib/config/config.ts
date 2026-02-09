@@ -19,10 +19,18 @@ export const external = {
 // PACKAGES
 // ============================================
 
+export interface ScreenshotConfig {
+	dark: string;
+	light: string;
+	darkMobile?: string;
+	lightMobile?: string;
+}
+
 export interface PackageConfig {
 	name: string;
 	shortName: string;
 	logo: string;
+	screenshot?: ScreenshotConfig;
 	docs?: string;
 	api?: string;
 	examples?: string;
@@ -36,6 +44,12 @@ export const packages: Record<string, PackageConfig> = {
 		name: 'PathSim',
 		shortName: 'pathsim',
 		logo: 'pathsim_logo.png',
+		screenshot: {
+			dark: 'screenshots/pathsim-dark.png',
+			light: 'screenshots/pathsim-light.png',
+			darkMobile: 'screenshots/pathsim-dark-mobile.png',
+			lightMobile: 'screenshots/pathsim-light-mobile.png'
+		},
 		docs: `${external.docs}/pathsim`,
 		api: `${external.docs}/pathsim/api`,
 		examples: `${external.docs}/pathsim/examples`,
@@ -46,6 +60,12 @@ export const packages: Record<string, PackageConfig> = {
 		name: 'PathSim-Chem',
 		shortName: 'chem',
 		logo: 'pathsim_chem_logo.png',
+		screenshot: {
+			dark: 'screenshots/chem-dark.png',
+			light: 'screenshots/chem-light.png',
+			darkMobile: 'screenshots/chem-dark-mobile.png',
+			lightMobile: 'screenshots/chem-light-mobile.png'
+		},
 		docs: `${external.docs}/chem`,
 		api: `${external.docs}/chem/api`,
 		pypi: `${external.pypi}/pathsim-chem`,
@@ -55,6 +75,12 @@ export const packages: Record<string, PackageConfig> = {
 		name: 'PathSim-Vehicle',
 		shortName: 'vehicle',
 		logo: 'pathsim_vehicle_logo.png',
+		screenshot: {
+			dark: 'screenshots/vehicle-dark.png',
+			light: 'screenshots/vehicle-light.png',
+			darkMobile: 'screenshots/vehicle-dark-mobile.png',
+			lightMobile: 'screenshots/vehicle-light-mobile.png'
+		},
 		docs: `${external.docs}/vehicle`,
 		api: `${external.docs}/vehicle/api`,
 		github: `${external.github}/pathsim-vehicle`
@@ -63,6 +89,12 @@ export const packages: Record<string, PackageConfig> = {
 		name: 'PathView',
 		shortName: 'pathview',
 		logo: 'pathview_logo.png',
+		screenshot: {
+			dark: 'screenshots/pathview-dark.png',
+			light: 'screenshots/pathview-light.png',
+			darkMobile: 'screenshots/pathview-dark-mobile.png',
+			lightMobile: 'screenshots/pathview-light-mobile.png'
+		},
 		app: external.view,
 		github: `${external.github}/pathview`
 	}

@@ -2,10 +2,13 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { base } from '$app/paths';
 	import Icon from '$lib/components/common/Icon.svelte';
+	import PortalScreenshot from '$lib/components/common/PortalScreenshot.svelte';
 	import { tooltip } from '$lib/components/common/Tooltip.svelte';
 	import { loadCodeMirrorModules, createEditorExtensions, type CodeMirrorModules } from '$lib/utils/codemirror';
 	import { packages, packageOrder, nav, hero, installation, features, exampleCode } from '$lib/config/config';
 	import { copyToClipboard } from '$lib/utils/clipboard';
+
+	let theme = $state<'dark' | 'light'>('dark');
 
 	let copiedPip = $state(false);
 	let copiedConda = $state(false);
@@ -27,11 +30,14 @@
 	}
 
 	onMount(async () => {
+		// Read current theme
+		theme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+
 		if (!editorContainer) return;
 
 		cmModules = await loadCodeMirrorModules();
 
-		const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+		const isDark = theme === 'dark';
 
 		editorView = new cmModules.EditorView({
 			doc: exampleCode,
@@ -43,13 +49,13 @@
 
 		// Watch for theme changes
 		themeObserver = new MutationObserver(() => {
+			theme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
 			if (editorView && cmModules && editorContainer) {
-				const newIsDark = document.documentElement.getAttribute('data-theme') !== 'light';
 				const currentCode = editorView.state.doc.toString();
 				editorView.destroy();
 				editorView = new cmModules.EditorView({
 					doc: currentCode,
-					extensions: createEditorExtensions(cmModules, newIsDark, { readOnly: true }),
+					extensions: createEditorExtensions(cmModules, theme === 'dark', { readOnly: true }),
 					parent: editorContainer
 				});
 			}
@@ -196,9 +202,21 @@
 							</a>
 						</div>
 					</div>
-					<a href={pkg.app || pkg.docs} class="ecosystem-body">
-						<img src="{base}/{pkg.logo}" alt={pkg.name} />
-					</a>
+					{#if pkg.screenshot}
+						<PortalScreenshot
+							id={pkgId}
+							screenshot={pkg.screenshot}
+							{theme}
+							onnavigate={() => {
+								const url = pkg.app || pkg.docs;
+								if (url) window.location.href = url + (url.includes('?') ? '&' : '?') + 'theme=' + theme;
+							}}
+						/>
+					{:else}
+						<a href={pkg.app || pkg.docs} class="ecosystem-body">
+							<img src="{base}/{pkg.logo}" alt={pkg.name} />
+						</a>
+					{/if}
 				</div>
 			{/each}
 		</div>
