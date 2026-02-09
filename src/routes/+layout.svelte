@@ -1,12 +1,14 @@
 <script lang="ts">
 	import '../app.css';
-	import { onMount } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import Tooltip from '$lib/components/common/Tooltip.svelte';
 	import Header from '$lib/components/layout/Header.svelte';
 
 	let { children } = $props();
 
 	let theme = $state<'dark' | 'light'>('dark');
+
+	setContext('theme', () => theme);
 
 	onMount(() => {
 		const urlTheme = new URL(window.location.href).searchParams.get('theme');

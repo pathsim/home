@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount, onDestroy, getContext } from 'svelte';
 	import { base } from '$app/paths';
 	import Icon from '$lib/components/common/Icon.svelte';
 	import PortalScreenshot from '$lib/components/common/PortalScreenshot.svelte';
@@ -8,7 +8,8 @@
 	import { packages, packageOrder, nav, hero, installation, features, exampleCode } from '$lib/config/config';
 	import { copyToClipboard } from '$lib/utils/clipboard';
 
-	let theme = $state<'dark' | 'light'>('dark');
+	const getTheme = getContext<() => 'dark' | 'light'>('theme');
+	const theme = $derived(getTheme());
 
 	let copiedPip = $state(false);
 	let copiedConda = $state(false);
@@ -18,7 +19,6 @@
 	let editorView: import('@codemirror/view').EditorView | null = null;
 	let cmModules: CodeMirrorModules | null = null;
 	let editorLoading = $state(true);
-	let themeObserver: MutationObserver | null = null;
 
 	function handleCopy(text: string, type: 'pip' | 'conda' | 'code') {
 		const setters = {
@@ -30,41 +30,34 @@
 	}
 
 	onMount(async () => {
-		// Read current theme
-		theme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-
 		if (!editorContainer) return;
 
 		cmModules = await loadCodeMirrorModules();
 
-		const isDark = theme === 'dark';
-
 		editorView = new cmModules.EditorView({
 			doc: exampleCode,
-			extensions: createEditorExtensions(cmModules, isDark, { readOnly: true }),
+			extensions: createEditorExtensions(cmModules, theme === 'dark', { readOnly: true }),
 			parent: editorContainer
 		});
 
 		editorLoading = false;
+	});
 
-		// Watch for theme changes
-		themeObserver = new MutationObserver(() => {
-			theme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-			if (editorView && cmModules && editorContainer) {
-				const currentCode = editorView.state.doc.toString();
-				editorView.destroy();
-				editorView = new cmModules.EditorView({
-					doc: currentCode,
-					extensions: createEditorExtensions(cmModules, theme === 'dark', { readOnly: true }),
-					parent: editorContainer
-				});
-			}
-		});
-		themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+	// Rebuild editor when theme changes
+	$effect(() => {
+		const isDark = theme === 'dark';
+		if (editorView && cmModules && editorContainer) {
+			const currentCode = editorView.state.doc.toString();
+			editorView.destroy();
+			editorView = new cmModules.EditorView({
+				doc: currentCode,
+				extensions: createEditorExtensions(cmModules, isDark, { readOnly: true }),
+				parent: editorContainer
+			});
+		}
 	});
 
 	onDestroy(() => {
-		themeObserver?.disconnect();
 		editorView?.destroy();
 	});
 </script>
