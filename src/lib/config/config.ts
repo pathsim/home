@@ -12,7 +12,8 @@ export const external = {
 	view: 'https://view.pathsim.org',
 	github: 'https://github.com/pathsim',
 	pypi: 'https://pypi.org/project',
-	sponsor: 'https://github.com/sponsors/milanofthe'
+	sponsor: 'https://github.com/sponsors/milanofthe',
+	consulting: 'https://milanrother.com/#services'
 };
 
 // ============================================
@@ -112,7 +113,8 @@ export const nav = {
 	docs: external.docs,
 	editor: external.view,
 	github: external.github,
-	sponsor: external.sponsor
+	sponsor: external.sponsor,
+	consulting: external.consulting
 };
 
 // ============================================
