@@ -89,9 +89,9 @@
 					<Icon name="github" size={20} />
 					<span class="action-label">GitHub</span>
 				</a>
-				<a href={nav.sponsor} class="action-card">
-					<Icon name="heart" size={20} />
-					<span class="action-label">Sponsor</span>
+				<a href={nav.consulting} class="action-card">
+					<Icon name="activity" size={20} />
+					<span class="action-label">Consulting</span>
 				</a>
 			</div>
 		</div>
@@ -227,6 +227,20 @@
 			{/each}
 		</div>
 	</section>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="footer-links">
+			<a href={nav.github}>GitHub</a>
+			<span class="footer-dot">&middot;</span>
+			<a href={nav.docs}>Docs</a>
+			<span class="footer-dot">&middot;</span>
+			<a href={nav.consulting}>Consulting</a>
+			<span class="footer-dot">&middot;</span>
+			<a href="mailto:milan.rother@gmx.de">Contact</a>
+		</div>
+		<p class="footer-copy">&copy; 2026 Milan Rother &middot; MIT License</p>
+	</footer>
 
 </main>
 
@@ -498,5 +512,42 @@
 			max-width: 100%;
 			overflow: hidden;
 		}
+	}
+
+	/* Footer */
+	.footer {
+		padding: var(--space-xl) 0;
+		border-top: 1px solid var(--border);
+		text-align: center;
+		margin-top: var(--space-xl);
+	}
+
+	.footer-links {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: var(--space-sm);
+		margin-bottom: var(--space-md);
+	}
+
+	.footer-links a {
+		color: var(--text-muted);
+		text-decoration: none;
+		font-size: var(--font-sm);
+		transition: color var(--transition-fast);
+	}
+
+	.footer-links a:hover {
+		color: var(--accent);
+	}
+
+	.footer-dot {
+		color: var(--text-disabled);
+		font-size: var(--font-sm);
+	}
+
+	.footer-copy {
+		color: var(--text-disabled);
+		font-size: var(--font-sm);
 	}
 </style>
