@@ -28,7 +28,9 @@ const sites = [
 	{ id: 'pathview', url: 'https://view.pathsim.org', viewports: pathviewViewports },
 	{ id: 'pathsim', url: 'https://docs.pathsim.org/pathsim' },
 	{ id: 'chem', url: 'https://docs.pathsim.org/chem' },
-	{ id: 'vehicle', url: 'https://docs.pathsim.org/vehicle' }
+	{ id: 'vehicle', url: 'https://docs.pathsim.org/vehicle' },
+	{ id: 'flight', url: 'https://docs.pathsim.org/flight' },
+	{ id: 'rf', url: 'https://docs.pathsim.org/rf' }
 ];
 
 const themes = ['dark', 'light'];

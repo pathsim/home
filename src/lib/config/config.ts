@@ -90,6 +90,12 @@ export const packages: Record<string, PackageConfig> = {
 		name: 'PathSim-Flight',
 		shortName: 'flight',
 		logo: 'pathsim_flight_logo.png',
+		screenshot: {
+			dark: 'screenshots/flight-dark.png',
+			light: 'screenshots/flight-light.png',
+			darkMobile: 'screenshots/flight-dark-mobile.png',
+			lightMobile: 'screenshots/flight-light-mobile.png'
+		},
 		docs: `${external.docs}/flight`,
 		api: `${external.docs}/flight/api`,
 		github: `${external.github}/pathsim-flight`
@@ -98,6 +104,12 @@ export const packages: Record<string, PackageConfig> = {
 		name: 'PathSim-RF',
 		shortName: 'rf',
 		logo: 'pathsim_rf_logo.png',
+		screenshot: {
+			dark: 'screenshots/rf-dark.png',
+			light: 'screenshots/rf-light.png',
+			darkMobile: 'screenshots/rf-dark-mobile.png',
+			lightMobile: 'screenshots/rf-light-mobile.png'
+		},
 		docs: `${external.docs}/rf`,
 		api: `${external.docs}/rf/api`,
 		github: `${external.github}/pathsim-rf`
