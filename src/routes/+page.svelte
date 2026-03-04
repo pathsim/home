@@ -228,6 +228,8 @@
 		</div>
 	</section>
 
+	<div class="separator"></div>
+
 	<!-- Footer -->
 	<footer class="footer">
 		<div class="footer-links">
@@ -517,9 +519,7 @@
 	/* Footer */
 	.footer {
 		padding: var(--space-xl) 0;
-		border-top: 1px solid var(--border);
 		text-align: center;
-		margin-top: var(--space-xl);
 	}
 
 	.footer-links {
