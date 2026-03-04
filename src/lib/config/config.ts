@@ -86,6 +86,22 @@ export const packages: Record<string, PackageConfig> = {
 		api: `${external.docs}/vehicle/api`,
 		github: `${external.github}/pathsim-vehicle`
 	},
+	flight: {
+		name: 'PathSim-Flight',
+		shortName: 'flight',
+		logo: 'pathsim_flight_logo.png',
+		docs: `${external.docs}/flight`,
+		api: `${external.docs}/flight/api`,
+		github: `${external.github}/pathsim-flight`
+	},
+	rf: {
+		name: 'PathSim-RF',
+		shortName: 'rf',
+		logo: 'pathsim_rf_logo.png',
+		docs: `${external.docs}/rf`,
+		api: `${external.docs}/rf/api`,
+		github: `${external.github}/pathsim-rf`
+	},
 	pathview: {
 		name: 'PathView',
 		shortName: 'pathview',
@@ -102,7 +118,7 @@ export const packages: Record<string, PackageConfig> = {
 };
 
 // Package display order for ecosystem section
-export const packageOrder = ['pathview', 'pathsim', 'chem', 'vehicle'] as const;
+export const packageOrder = ['pathview', 'pathsim', 'chem', 'vehicle', 'flight', 'rf'] as const;
 
 // ============================================
 // NAVIGATION
@@ -183,7 +199,7 @@ export const features: Feature[] = [
 	},
 	{
 		title: 'Domain Toolboxes',
-		description: 'Specialized blocks for chemical engineering and vehicle dynamics.'
+		description: 'Specialized blocks for chemical, vehicle, flight, and RF engineering.'
 	}
 ];
 
