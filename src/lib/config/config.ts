@@ -69,6 +69,7 @@ export const packages: Record<string, PackageConfig> = {
 		},
 		docs: `${external.docs}/chem`,
 		api: `${external.docs}/chem/api`,
+		examples: `${external.docs}/chem/examples`,
 		pypi: `${external.pypi}/pathsim-chem`,
 		github: `${external.github}/pathsim-chem`
 	},
