@@ -113,6 +113,7 @@ export const packages: Record<string, PackageConfig> = {
 		},
 		docs: `${external.docs}/rf`,
 		api: `${external.docs}/rf/api`,
+		examples: `${external.docs}/rf/examples`,
 		github: `${external.github}/pathsim-rf`
 	},
 	pathview: {
