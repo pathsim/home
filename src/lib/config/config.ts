@@ -114,6 +114,7 @@ export const packages: Record<string, PackageConfig> = {
 		docs: `${external.docs}/rf`,
 		api: `${external.docs}/rf/api`,
 		examples: `${external.docs}/rf/examples`,
+		pypi: `${external.pypi}/pathsim-rf`,
 		github: `${external.github}/pathsim-rf`
 	},
 	pathview: {
