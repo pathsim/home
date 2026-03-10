@@ -1,0 +1,38 @@
+# PathSim
+
+> PathSim is a Python framework for simulating dynamical systems using block diagrams. Build, simulate, and analyze continuous-time, discrete-time, and hybrid systems.
+
+## Overview
+
+PathSim provides Python-native system modeling with intuitive block diagrams. From simple ODEs to complex multi-domain simulations.
+
+Install: `pip install pathsim` or `conda install -c conda-forge pathsim`
+
+## Features
+
+- **Hot-Swappable**: Switch blocks and solvers during active simulation at runtime.
+- **MIMO Capable**: Multiple input, multiple output ports built into all blocks.
+- **18+ Solvers**: Implicit, explicit, and adaptive integrators for stiff and non-stiff systems.
+- **Hierarchical**: Nested subsystems for modular, reusable component design.
+- **Event Handling**: Zero-crossing detection and scheduled events for hybrid systems.
+- **Extensible**: Create custom blocks by subclassing the base Block class.
+- **Browser Editor**: Design and simulate visually with PathView using Pyodide.
+- **Domain Toolboxes**: Specialized blocks for chemical, vehicle, flight, and RF engineering.
+
+## Ecosystem
+
+- [PathSim](https://github.com/pathsim/pathsim): Core simulation framework — [Docs](https://docs.pathsim.org/pathsim) — [PyPI](https://pypi.org/project/pathsim)
+- [PathSim-Chem](https://github.com/pathsim/pathsim-chem): Chemical engineering blocks — [Docs](https://docs.pathsim.org/chem) — [PyPI](https://pypi.org/project/pathsim-chem)
+- [PathSim-Vehicle](https://github.com/pathsim/pathsim-vehicle): Vehicle dynamics blocks — [Docs](https://docs.pathsim.org/vehicle)
+- [PathSim-Flight](https://github.com/pathsim/pathsim-flight): Flight dynamics blocks — [Docs](https://docs.pathsim.org/flight)
+- [PathSim-RF](https://github.com/pathsim/pathsim-rf): RF engineering blocks — [Docs](https://docs.pathsim.org/rf) — [PyPI](https://pypi.org/project/pathsim-rf)
+- [PathView](https://view.pathsim.org): Browser-based visual block diagram editor
+
+## Links
+
+- [Homepage](https://pathsim.org)
+- [Documentation](https://docs.pathsim.org)
+- [PathView Editor](https://view.pathsim.org)
+- [GitHub Organization](https://github.com/pathsim)
+- [JOSS Paper](https://doi.org/10.21105/joss.07484)
+- [Sponsor](https://github.com/sponsors/milanofthe)
