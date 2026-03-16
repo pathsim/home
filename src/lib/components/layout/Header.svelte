@@ -13,12 +13,14 @@
 
 <header>
 	<div class="header-content">
-		<nav class="header-actions">
-			<a href={nav.docs} class="icon-btn" use:tooltip={'Docs'}>
-				<Icon name="book" size={14} />
-			</a>
+		<div class="header-left">
 			<a href="/" class="icon-btn" use:tooltip={'Home'}>
 				<Icon name="home" size={14} />
+			</a>
+		</div>
+		<nav class="header-right">
+			<a href={nav.docs} class="icon-btn" use:tooltip={'Docs'}>
+				<Icon name="book" size={14} />
 			</a>
 			<a href={nav.editor} class="icon-btn" use:tooltip={'Editor'}>
 				<Icon name="play" size={14} />
@@ -48,10 +50,15 @@
 		padding: 0 var(--space-lg);
 		display: flex;
 		align-items: center;
-		justify-content: flex-end;
+		justify-content: space-between;
 	}
 
-	nav {
+	.header-left {
+		display: flex;
+		align-items: center;
+	}
+
+	.header-right {
 		display: flex;
 		align-items: center;
 		gap: var(--space-xs);
