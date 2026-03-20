@@ -239,7 +239,7 @@
 			<span class="footer-dot">&middot;</span>
 			<a href={nav.consulting}>Consulting</a>
 			<span class="footer-dot">&middot;</span>
-			<a href="mailto:info@milanrother.com">Contact</a>
+			<a href="mailto:info@pathsim.org">Contact</a>
 		</div>
 		<p class="footer-copy">&copy; 2026 Milan Rother &middot; MIT License</p>
 	</footer>
