@@ -26,6 +26,7 @@ const pathviewViewports = [
 
 const sites = [
 	{ id: 'pathview', url: 'https://view.pathsim.org', viewports: pathviewViewports },
+	{ id: 'codegen', url: 'https://code.pathsim.org' },
 	{ id: 'pathsim', url: 'https://docs.pathsim.org/pathsim' },
 	{ id: 'chem', url: 'https://docs.pathsim.org/chem' },
 	{ id: 'vehicle', url: 'https://docs.pathsim.org/vehicle' },

@@ -117,6 +117,19 @@ export const packages: Record<string, PackageConfig> = {
 		pypi: `${external.pypi}/pathsim-rf`,
 		github: `${external.github}/pathsim-rf`
 	},
+	codegen: {
+		name: 'PathSim Codegen',
+		shortName: 'codegen',
+		logo: 'codegen_logo.png',
+		screenshot: {
+			dark: 'screenshots/codegen-dark.png',
+			light: 'screenshots/codegen-light.png',
+			darkMobile: 'screenshots/codegen-dark-mobile.png',
+			lightMobile: 'screenshots/codegen-light-mobile.png'
+		},
+		app: 'https://code.pathsim.org',
+		github: `${external.github}/codegen`
+	},
 	pathview: {
 		name: 'PathView',
 		shortName: 'pathview',
@@ -133,7 +146,7 @@ export const packages: Record<string, PackageConfig> = {
 };
 
 // Package display order for ecosystem section
-export const packageOrder = ['pathview', 'pathsim', 'chem', 'vehicle', 'flight', 'rf'] as const;
+export const packageOrder = ['pathview', 'codegen', 'pathsim', 'chem', 'vehicle', 'flight', 'rf'] as const;
 
 // ============================================
 // NAVIGATION
