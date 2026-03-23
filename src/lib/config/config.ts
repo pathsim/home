@@ -128,7 +128,7 @@ export const packages: Record<string, PackageConfig> = {
 			lightMobile: 'screenshots/codegen-light-mobile.png'
 		},
 		app: 'https://code.pathsim.org',
-		github: `${external.github}/codegen`
+		github: ''
 	},
 	pathview: {
 		name: 'PathView',

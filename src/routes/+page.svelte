@@ -188,9 +188,11 @@
 									<Icon name="code" size={14} />
 								</a>
 							{/if}
+							{#if pkg.github}
 							<a href={pkg.github} class="icon-btn" use:tooltip={'GitHub'}>
 								<Icon name="github" size={14} />
 							</a>
+						{/if}
 						</div>
 					</div>
 					{#if pkg.screenshot}
