@@ -61,7 +61,7 @@
 </script>
 
 <svelte:head>
-	<title>PathSim</title>
+	<title>PathSim — Python Dynamical System Simulation Framework</title>
 	<meta name="description" content={hero.metaDescription} />
 </svelte:head>
 
@@ -70,7 +70,7 @@
 	<section class="hero">
 		<div class="hero-content">
 			<img src="{base}/pathsim_logo.png" alt="PathSim" class="hero-logo" />
-			<p class="tagline">{hero.tagline}</p>
+			<h1 class="tagline">{hero.tagline}</h1>
 			<p class="description">{hero.description}</p>
 			<div class="hero-actions">
 				<a href={nav.getStarted} class="action-card">
