@@ -160,40 +160,43 @@
 			{#each packageOrder as pkgId}
 				{@const pkg = packages[pkgId]}
 				<div class="ecosystem-card elevated">
-					<div class="panel-header">
-						<span>{pkg.shortName}</span>
-						<div class="header-actions">
-							{#if pkg.app}
-								<a href={pkg.app} class="icon-btn" use:tooltip={'App'}>
-									<Icon name="play" size={14} />
+					<div class="card-info">
+						<div class="card-info-row">
+							<span>{pkg.shortName}</span>
+							<div class="header-actions">
+								{#if pkg.app}
+									<a href={pkg.app} class="icon-btn" use:tooltip={'App'}>
+										<Icon name="play" size={14} />
+									</a>
+								{/if}
+								{#if pkg.api}
+									<a href={pkg.api} class="icon-btn" use:tooltip={'API'}>
+										<Icon name="braces" size={14} />
+									</a>
+								{/if}
+								{#if pkg.docs}
+									<a href={pkg.docs} class="icon-btn" use:tooltip={'Docs'}>
+										<Icon name="book" size={14} />
+									</a>
+								{/if}
+								{#if pkg.pypi}
+									<a href={pkg.pypi} class="icon-btn" use:tooltip={'PyPI'}>
+										<Icon name="package" size={14} />
+									</a>
+								{/if}
+								{#if pkg.examples}
+									<a href={pkg.examples} class="icon-btn" use:tooltip={'Examples'}>
+										<Icon name="code" size={14} />
+									</a>
+								{/if}
+								{#if pkg.github}
+								<a href={pkg.github} class="icon-btn" use:tooltip={'GitHub'}>
+									<Icon name="github" size={14} />
 								</a>
 							{/if}
-							{#if pkg.api}
-								<a href={pkg.api} class="icon-btn" use:tooltip={'API'}>
-									<Icon name="braces" size={14} />
-								</a>
-							{/if}
-							{#if pkg.docs}
-								<a href={pkg.docs} class="icon-btn" use:tooltip={'Docs'}>
-									<Icon name="book" size={14} />
-								</a>
-							{/if}
-							{#if pkg.pypi}
-								<a href={pkg.pypi} class="icon-btn" use:tooltip={'PyPI'}>
-									<Icon name="package" size={14} />
-								</a>
-							{/if}
-							{#if pkg.examples}
-								<a href={pkg.examples} class="icon-btn" use:tooltip={'Examples'}>
-									<Icon name="code" size={14} />
-								</a>
-							{/if}
-							{#if pkg.github}
-							<a href={pkg.github} class="icon-btn" use:tooltip={'GitHub'}>
-								<Icon name="github" size={14} />
-							</a>
-						{/if}
+							</div>
 						</div>
+						<div class="card-description">{pkg.description}</div>
 					</div>
 					{#if pkg.screenshot}
 						<PortalScreenshot
@@ -453,6 +456,7 @@
 	}
 
 	.ecosystem-card {
+		position: relative;
 		border-radius: var(--radius-lg);
 		border: 1px solid var(--border);
 		overflow: hidden;
@@ -464,9 +468,54 @@
 		box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
 	}
 
+	.card-info {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 1;
+		padding: var(--space-sm) var(--space-lg);
+		background: var(--surface-raised);
+		border-bottom: 1px solid var(--border);
+		border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+		font-size: var(--font-base);
+		font-weight: 600;
+		color: var(--text-muted);
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.card-info-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.card-description {
+		font-size: var(--font-sm);
+		font-weight: 400;
+		color: var(--text-muted);
+		text-transform: none;
+		letter-spacing: normal;
+		max-height: 0;
+		overflow: hidden;
+		opacity: 0;
+		transition: max-height 0.15s ease, opacity 0.15s ease, margin 0.15s ease;
+	}
+
+	.ecosystem-card:hover .card-description {
+		max-height: 100px;
+		opacity: 1;
+		margin-top: 4px;
+	}
+
 	.header-actions {
 		display: flex;
 		gap: var(--space-xs);
+	}
+
+	.ecosystem-card :global(.portal-screenshot) {
+		padding-top: 40px;
 	}
 
 	.ecosystem-body {
@@ -474,6 +523,7 @@
 		align-items: center;
 		justify-content: center;
 		padding: var(--space-xl);
+		padding-top: calc(40px + var(--space-xl));
 		background: var(--surface);
 		text-decoration: none;
 	}

@@ -30,6 +30,7 @@ export interface ScreenshotConfig {
 export interface PackageConfig {
 	name: string;
 	shortName: string;
+	description: string;
 	logo: string;
 	screenshot?: ScreenshotConfig;
 	docs?: string;
@@ -44,6 +45,7 @@ export const packages: Record<string, PackageConfig> = {
 	pathsim: {
 		name: 'PathSim',
 		shortName: 'pathsim',
+		description: 'Build and simulate continuous-time, discrete-time, and hybrid dynamical systems using block diagrams.',
 		logo: 'pathsim_logo.png',
 		screenshot: {
 			dark: 'screenshots/pathsim-dark.png',
@@ -60,6 +62,7 @@ export const packages: Record<string, PackageConfig> = {
 	chem: {
 		name: 'PathSim-Chem',
 		shortName: 'chem',
+		description: 'Thermodynamic property correlations, activity coefficients, equations of state, and tritium processing.',
 		logo: 'pathsim_chem_logo.png',
 		screenshot: {
 			dark: 'screenshots/chem-dark.png',
@@ -76,6 +79,7 @@ export const packages: Record<string, PackageConfig> = {
 	vehicle: {
 		name: 'PathSim-Vehicle',
 		shortName: 'vehicle',
+		description: 'Tire models, suspension systems, and powertrain components for vehicle dynamics simulation.',
 		logo: 'pathsim_vehicle_logo.png',
 		screenshot: {
 			dark: 'screenshots/vehicle-dark.png',
@@ -90,6 +94,7 @@ export const packages: Record<string, PackageConfig> = {
 	flight: {
 		name: 'PathSim-Flight',
 		shortName: 'flight',
+		description: 'Six degrees of freedom equations of motion, aerodynamics, and propulsion for flight simulation.',
 		logo: 'pathsim_flight_logo.png',
 		screenshot: {
 			dark: 'screenshots/flight-dark.png',
@@ -104,6 +109,7 @@ export const packages: Record<string, PackageConfig> = {
 	rf: {
 		name: 'PathSim-RF',
 		shortName: 'rf',
+		description: 'S-parameter networks, transmission lines, amplifiers, and mixers for RF and microwave simulation.',
 		logo: 'pathsim_rf_logo.png',
 		screenshot: {
 			dark: 'screenshots/rf-dark.png',
@@ -120,6 +126,7 @@ export const packages: Record<string, PackageConfig> = {
 	codegen: {
 		name: 'PathSim Codegen',
 		shortName: 'codegen',
+		description: 'Generates standalone C code from PathSim simulations for embedded deployment.',
 		logo: 'codegen_logo.png',
 		screenshot: {
 			dark: 'screenshots/codegen-dark.png',
@@ -133,6 +140,7 @@ export const packages: Record<string, PackageConfig> = {
 	pathview: {
 		name: 'PathView',
 		shortName: 'pathview',
+		description: 'Visual block diagram editor for building and simulating PathSim models in the browser.',
 		logo: 'pathview_logo.png',
 		screenshot: {
 			dark: 'screenshots/pathview-dark.png',
