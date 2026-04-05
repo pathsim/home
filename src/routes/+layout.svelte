@@ -24,10 +24,24 @@
 		document.documentElement.setAttribute('data-theme', theme);
 	});
 
-	function toggleTheme() {
-		theme = theme === 'dark' ? 'light' : 'dark';
-		localStorage.setItem('theme', theme);
-		document.documentElement.setAttribute('data-theme', theme);
+	function toggleTheme(e: MouseEvent) {
+		const apply = () => {
+			theme = theme === 'dark' ? 'light' : 'dark';
+			localStorage.setItem('theme', theme);
+			document.documentElement.setAttribute('data-theme', theme);
+		};
+
+		if (!document.startViewTransition) { apply(); return; }
+
+		const x = e.clientX, y = e.clientY;
+		const maxRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+		const transition = document.startViewTransition(apply);
+		transition.ready.then(() => {
+			document.documentElement.animate(
+				{ clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${maxRadius}px at ${x}px ${y}px)`] },
+				{ duration: 500, easing: 'ease-out', pseudoElement: '::view-transition-new(root)' }
+			);
+		});
 	}
 </script>
 
