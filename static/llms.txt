@@ -23,8 +23,8 @@ Install: `pip install pathsim` or `conda install -c conda-forge pathsim`
 
 - [PathSim](https://github.com/pathsim/pathsim): Core simulation framework — [Docs](https://docs.pathsim.org/pathsim) — [PyPI](https://pypi.org/project/pathsim)
 - [PathSim-Chem](https://github.com/pathsim/pathsim-chem): Chemical engineering blocks — [Docs](https://docs.pathsim.org/chem) — [PyPI](https://pypi.org/project/pathsim-chem)
-- [PathSim-Vehicle](https://github.com/pathsim/pathsim-vehicle): Vehicle dynamics blocks — [Docs](https://docs.pathsim.org/vehicle)
-- [PathSim-Flight](https://github.com/pathsim/pathsim-flight): Flight dynamics blocks — [Docs](https://docs.pathsim.org/flight)
+- [PathSim-Vehicle](https://github.com/pathsim/pathsim-vehicle): Vehicle dynamics blocks — [Docs](https://docs.pathsim.org/vehicle) — [PyPI](https://pypi.org/project/pathsim-vehicle)
+- [PathSim-Flight](https://github.com/pathsim/pathsim-flight): Flight dynamics blocks — [Docs](https://docs.pathsim.org/flight) — [PyPI](https://pypi.org/project/pathsim-flight)
 - [PathSim-RF](https://github.com/pathsim/pathsim-rf): RF engineering blocks — [Docs](https://docs.pathsim.org/rf) — [PyPI](https://pypi.org/project/pathsim-rf)
 - [PathView](https://view.pathsim.org): Browser-based visual block diagram editor
 

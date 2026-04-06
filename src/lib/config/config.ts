@@ -89,6 +89,7 @@ export const packages: Record<string, PackageConfig> = {
 		},
 		docs: `${external.docs}/vehicle`,
 		api: `${external.docs}/vehicle/api`,
+		pypi: `${external.pypi}/pathsim-vehicle`,
 		github: `${external.github}/pathsim-vehicle`
 	},
 	flight: {
@@ -104,6 +105,7 @@ export const packages: Record<string, PackageConfig> = {
 		},
 		docs: `${external.docs}/flight`,
 		api: `${external.docs}/flight/api`,
+		pypi: `${external.pypi}/pathsim-flight`,
 		github: `${external.github}/pathsim-flight`
 	},
 	rf: {
