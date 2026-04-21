@@ -118,6 +118,29 @@
 
 	<div class="separator"></div>
 
+	<!-- About Section -->
+	<section class="prose-section">
+		<h2>About</h2>
+		<p>
+			PathSim is a Python framework for modeling continuous-time, discrete-time,
+			and hybrid dynamical systems as block diagrams. It targets engineers and
+			researchers who want a readable, scriptable alternative to traditional
+			simulation tools without giving up solver depth: more than thirty explicit,
+			implicit, and adaptive integrators, zero-crossing events and scheduled
+			triggers, hot-swappable blocks, and hierarchical subsystems. The only
+			runtime dependencies are numpy, scipy, and matplotlib.
+		</p>
+		<p>
+			Around the core sits a full ecosystem. PathView provides a visual
+			block-diagram editor in the browser, Codegen exports standalone C for
+			embedded deployment, and dedicated toolboxes cover chemical, vehicle,
+			flight, and RF engineering. PathSim and its domain toolboxes are released
+			under the MIT license.
+		</p>
+	</section>
+
+	<div class="separator"></div>
+
 	<!-- Installation Section -->
 	<section class="installation">
 		<h2>Installation</h2>

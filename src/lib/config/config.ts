@@ -216,7 +216,7 @@ export const features: Feature[] = [
 		description: 'Multiple input, multiple output ports built into all blocks.'
 	},
 	{
-		title: '18+ Solvers',
+		title: '30+ Solvers',
 		description: 'Implicit, explicit, and adaptive integrators for stiff and non-stiff systems.'
 	},
 	{

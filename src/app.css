@@ -1053,3 +1053,21 @@ input::placeholder {
 	font-size: var(--font-base);
 	max-height: 300px;
 }
+
+/* Prose sections (editorial copy) */
+.prose-section {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-lg);
+}
+
+.prose-section > h2 {
+	margin-bottom: 0;
+}
+
+.prose-section > p {
+	margin: 0;
+	color: var(--text-muted);
+	font-size: 1rem;
+	line-height: 1.65;
+}
