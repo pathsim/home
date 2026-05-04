@@ -81,6 +81,12 @@ export const packages: Record<string, PackageConfig> = {
 		shortName: 'batt',
 		description: 'Battery cell blocks with PyBaMM integration for coupled electrothermal simulation.',
 		logo: 'pathsim_batt_logo.png',
+		screenshot: {
+			dark: 'screenshots/batt-dark.png',
+			light: 'screenshots/batt-light.png',
+			darkMobile: 'screenshots/batt-dark-mobile.png',
+			lightMobile: 'screenshots/batt-light-mobile.png'
+		},
 		docs: `${external.docs}/batt`,
 		api: `${external.docs}/batt/api`,
 		pypi: `${external.pypi}/pathsim-batt`,
