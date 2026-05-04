@@ -76,6 +76,16 @@ export const packages: Record<string, PackageConfig> = {
 		pypi: `${external.pypi}/pathsim-chem`,
 		github: `${external.github}/pathsim-chem`
 	},
+	batt: {
+		name: 'PathSim-Batt',
+		shortName: 'batt',
+		description: 'Battery cell blocks with PyBaMM integration for coupled electrothermal simulation.',
+		logo: 'pathsim_batt_logo.png',
+		docs: `${external.docs}/batt`,
+		api: `${external.docs}/batt/api`,
+		pypi: `${external.pypi}/pathsim-batt`,
+		github: `${external.github}/pathsim-batt`
+	},
 	vehicle: {
 		name: 'PathSim-Vehicle',
 		shortName: 'vehicle',
@@ -156,7 +166,7 @@ export const packages: Record<string, PackageConfig> = {
 };
 
 // Package display order for ecosystem section
-export const packageOrder = ['pathview', 'codegen', 'pathsim', 'chem', 'vehicle', 'flight', 'rf'] as const;
+export const packageOrder = ['pathview', 'codegen', 'pathsim', 'chem', 'batt', 'vehicle', 'flight', 'rf'] as const;
 
 // ============================================
 // NAVIGATION
