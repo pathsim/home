@@ -79,9 +79,10 @@ async function main(): Promise<void> {
 	}
 
 	console.log('Launching browser...');
+	const execPath = process.env.PUPPETEER_EXECUTABLE_PATH;
 	const browser = await puppeteer.launch({
 		headless: true,
-		channel: 'chrome',
+		...(execPath ? { executablePath: execPath } : { channel: 'chrome' }),
 		args: ['--no-sandbox', '--disable-setuid-sandbox']
 	});
 

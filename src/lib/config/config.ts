@@ -146,6 +146,12 @@ export const packages: Record<string, PackageConfig> = {
 		shortName: 'fmi',
 		description: 'Wrap Co-Simulation and Model-Exchange FMUs (FMI 2.0 / 3.0) as PathSim blocks, driven by FMPy.',
 		logo: 'pathsim_fmi_logo.png',
+		screenshot: {
+			dark: 'screenshots/fmi-dark.png',
+			light: 'screenshots/fmi-light.png',
+			darkMobile: 'screenshots/fmi-dark-mobile.png',
+			lightMobile: 'screenshots/fmi-light-mobile.png'
+		},
 		docs: `${external.docs}/fmi`,
 		api: `${external.docs}/fmi/api`,
 		pypi: `${external.pypi}/pathsim-fmi`,
