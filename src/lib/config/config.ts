@@ -141,6 +141,16 @@ export const packages: Record<string, PackageConfig> = {
 		pypi: `${external.pypi}/pathsim-rf`,
 		github: `${external.github}/pathsim-rf`
 	},
+	fmi: {
+		name: 'PathSim-FMI',
+		shortName: 'fmi',
+		description: 'Wrap Co-Simulation and Model-Exchange FMUs (FMI 2.0 / 3.0) as PathSim blocks, driven by FMPy.',
+		logo: 'pathsim_fmi_logo.png',
+		docs: `${external.docs}/fmi`,
+		api: `${external.docs}/fmi/api`,
+		pypi: `${external.pypi}/pathsim-fmi`,
+		github: `${external.github}/pathsim-fmi`
+	},
 	codegen: {
 		name: 'PathSim Codegen',
 		shortName: 'codegen',
@@ -172,7 +182,7 @@ export const packages: Record<string, PackageConfig> = {
 };
 
 // Package display order for ecosystem section
-export const packageOrder = ['pathview', 'codegen', 'pathsim', 'chem', 'batt', 'vehicle', 'flight', 'rf'] as const;
+export const packageOrder = ['pathview', 'codegen', 'pathsim', 'chem', 'batt', 'vehicle', 'flight', 'rf', 'fmi'] as const;
 
 // ============================================
 // NAVIGATION
