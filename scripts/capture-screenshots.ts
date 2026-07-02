@@ -41,7 +41,7 @@ function viewportsFor(shortName: string): Viewport[] {
 }
 
 function urlFor(pkg: PackageConfig): string | null {
-	return pkg.app ?? pkg.docs ?? null;
+	return pkg.screenshotUrl ?? pkg.app ?? pkg.docs ?? null;
 }
 
 async function captureScreenshot(
@@ -86,9 +86,14 @@ async function main(): Promise<void> {
 		args: ['--no-sandbox', '--disable-setuid-sandbox']
 	});
 
+	// Optional CLI filter: `... capture-screenshots.ts fastsim pathview` captures
+	// only the named packages (by shortName). No args = capture everything.
+	const only = process.argv.slice(2);
+
 	try {
 		for (const pkgId of packageOrder) {
 			const pkg = packages[pkgId];
+			if (only.length && !only.includes(pkg.shortName)) continue;
 			const url = urlFor(pkg);
 			if (!url) {
 				console.log(`\n⊘ ${pkg.shortName}: no app/docs URL, skipping`);

@@ -39,6 +39,10 @@ export interface PackageConfig {
 	pypi?: string;
 	github: string;
 	app?: string;
+	// Override the URL the screenshot is captured from. Defaults to `app` (then
+	// `docs`). Use when the tile should link somewhere other than what it shows —
+	// e.g. fastsim links to the /app editor but shows its marketing landing page.
+	screenshotUrl?: string;
 }
 
 export const packages: Record<string, PackageConfig> = {
@@ -168,7 +172,8 @@ export const packages: Record<string, PackageConfig> = {
 			darkMobile: 'screenshots/fastsim-dark-mobile.png',
 			lightMobile: 'screenshots/fastsim-light-mobile.png'
 		},
-		app: 'https://code.pathsim.org',
+		app: 'https://fast.pathsim.org/app',
+		screenshotUrl: 'https://fast.pathsim.org',
 		docs: `${external.docs}/fastsim`,
 		github: `${external.github}/fastsim`
 	},
