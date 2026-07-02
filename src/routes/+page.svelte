@@ -132,10 +132,11 @@
 		</p>
 		<p>
 			Around the core sits a full ecosystem. PathView provides a visual
-			block-diagram editor in the browser, Codegen exports standalone C for
-			embedded deployment, and dedicated toolboxes cover chemical, battery,
-			vehicle, flight, and RF engineering. PathSim and its domain toolboxes are released
-			under the MIT license.
+			block-diagram editor in the browser, FastSim is a Rust engine with the
+			same API that also generates standalone C for embedded deployment, and
+			dedicated toolboxes cover chemical, battery, vehicle, flight, and RF
+			engineering. PathSim and its domain toolboxes are released under the MIT
+			license.
 		</p>
 	</section>
 

@@ -141,19 +141,20 @@ export const packages: Record<string, PackageConfig> = {
 		pypi: `${external.pypi}/pathsim-rf`,
 		github: `${external.github}/pathsim-rf`
 	},
-	codegen: {
-		name: 'PathSim Codegen',
-		shortName: 'codegen',
-		description: 'Generates standalone C code from PathSim simulations for embedded deployment.',
-		logo: 'codegen_logo.png',
+	fastsim: {
+		name: 'FastSim',
+		shortName: 'fastsim',
+		description: 'Fast Rust reimplementation of PathSim with an identical Python API and standalone C code generation for embedded deployment.',
+		logo: 'fastsim_logo.png',
 		screenshot: {
-			dark: 'screenshots/codegen-dark.png',
-			light: 'screenshots/codegen-light.png',
-			darkMobile: 'screenshots/codegen-dark-mobile.png',
-			lightMobile: 'screenshots/codegen-light-mobile.png'
+			dark: 'screenshots/fastsim-dark.png',
+			light: 'screenshots/fastsim-light.png',
+			darkMobile: 'screenshots/fastsim-dark-mobile.png',
+			lightMobile: 'screenshots/fastsim-light-mobile.png'
 		},
 		app: 'https://code.pathsim.org',
-		github: ''
+		docs: `${external.docs}/fastsim`,
+		github: `${external.github}/fastsim`
 	},
 	pathview: {
 		name: 'PathView',
@@ -172,7 +173,7 @@ export const packages: Record<string, PackageConfig> = {
 };
 
 // Package display order for ecosystem section
-export const packageOrder = ['pathview', 'codegen', 'pathsim', 'chem', 'batt', 'vehicle', 'flight', 'rf'] as const;
+export const packageOrder = ['pathview', 'fastsim', 'pathsim', 'chem', 'batt', 'vehicle', 'flight', 'rf'] as const;
 
 // ============================================
 // NAVIGATION
